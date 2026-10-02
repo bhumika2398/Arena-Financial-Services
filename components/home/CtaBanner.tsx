@@ -9,7 +9,7 @@ import { SectionVideoBackground } from "@/components/video/SectionVideoBackgroun
 
 export function CtaBanner() {
   return (
-    <section className="bg-deep-900 py-14">
+    <section className="bg-deep-900 py-10">
       <Container>
         <motion.div
           initial={{ opacity: 0, y: 20 }}

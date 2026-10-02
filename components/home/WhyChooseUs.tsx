@@ -41,9 +41,9 @@ const features = [
 
 export function WhyChooseUs() {
   return (
-    <section className="relative overflow-hidden bg-mint py-16">
+    <section className="relative overflow-hidden bg-mint py-10">
       <NetworkGrowth />
-      <Container className="relative z-10 flex flex-col gap-10">
+      <Container className="relative z-10 flex flex-col gap-6">
         <SectionHeading
           eyebrow="Why Arena Finserv"
           title="A Partner You Can Rely On"

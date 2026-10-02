@@ -1,6 +1,8 @@
 ﻿"use client";
 
 import { useReducedMotion } from "framer-motion";
+import Image from "next/image";
+import { useState } from "react";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { partners } from "@/lib/data";
@@ -14,13 +16,25 @@ const rows = [
 
 const rowAnimations = ["animate-marquee", "animate-marquee-reverse", "animate-marquee"];
 
-function LogoPill({ name }: { name: string }) {
+function LogoPill({ name, logo }: { name: string; logo?: string }) {
+  const [failed, setFailed] = useState(false);
   return (
-    // [PLACEHOLDER LOGO] — swap this pill for a real partner logo image.
     <div
-      className="flex h-16 w-48 shrink-0 items-center justify-center rounded-xl border border-deep-100 bg-white px-4 text-center shadow-sm grayscale opacity-60 transition-all duration-300 hover:grayscale-0 hover:opacity-100 hover:shadow-md"
+      className="flex h-20 w-48 shrink-0 items-center justify-center rounded-xl border border-deep-100 bg-white px-6 py-4 text-center shadow-sm transition-shadow duration-300 hover:shadow-md"
     >
-      <span className="font-display text-sm font-bold text-deep-700">{name}</span>
+      {logo && !failed ? (
+        <Image
+          src={logo}
+          alt={name}
+          width={140}
+          height={40}
+          unoptimized={logo.endsWith(".svg")}
+          onError={() => setFailed(true)}
+          className="h-10 w-auto max-w-full object-contain"
+        />
+      ) : (
+        <span className="font-display text-sm font-bold text-deep-700">{name}</span>
+      )}
     </div>
   );
 }
@@ -31,7 +45,7 @@ function MarqueeRow({
   reducedMotion,
   hideOnMobile,
 }: {
-  names: { id: string; name: string }[];
+  names: { id: string; name: string; logo?: string }[];
   animationClass: string;
   reducedMotion: boolean;
   hideOnMobile?: boolean;
@@ -45,7 +59,7 @@ function MarqueeRow({
         )}
       >
         {names.map((partner) => (
-          <LogoPill key={partner.id} name={partner.name} />
+          <LogoPill key={partner.id} name={partner.name} logo={partner.logo} />
         ))}
       </div>
     );
@@ -68,7 +82,7 @@ function MarqueeRow({
         )}
       >
         {looped.map((partner, i) => (
-          <LogoPill key={`${partner.id}-${i}`} name={partner.name} />
+          <LogoPill key={`${partner.id}-${i}`} name={partner.name} logo={partner.logo} />
         ))}
       </div>
     </div>
@@ -79,8 +93,8 @@ export function PartnerMarquee() {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <section className="border-y border-deep-100 bg-white py-12">
-      <Container className="mb-10">
+    <section className="border-y border-deep-100 bg-white py-8">
+      <Container className="mb-6">
         <SectionHeading
           eyebrow="30+ Banking & Financial Partners"
           title="Associated With"

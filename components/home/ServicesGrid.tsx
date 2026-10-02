@@ -25,12 +25,12 @@ const itemVariants = {
 
 export function ServicesGrid() {
   return (
-    <section className="bg-white py-16">
-      <Container className="flex flex-col gap-10">
+    <section className="bg-white py-10">
+      <Container className="flex flex-col gap-6">
         <SectionHeading
-          eyebrow="What We Offer"
+          eyebrow="Business Finance & Solutions"
           title="Financial Products Tailored to You"
-          subtitle="Nine core solutions designed to cover every stage of your financial journey."
+          subtitle="What we offer: nine core solutions designed to cover every stage of your financial journey."
         />
 
         <motion.div
@@ -38,15 +38,15 @@ export function ServicesGrid() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-100px" }}
-          className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          className="grid items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-3"
         >
           {services.map((service) => {
             const Icon = iconMap[service.icon];
             return (
-              <motion.div key={service.slug} variants={itemVariants}>
-                <TiltCard maxTilt={8}>
-                  <Link href={`/services/${service.slug}`}>
-                    <Card className="group h-full rounded-none border-2 border-deep-900 bg-white shadow-none transition-shadow duration-300 hover:shadow-xl">
+              <motion.div key={service.slug} variants={itemVariants} className="h-full">
+                <TiltCard maxTilt={8} className="h-full">
+                  <Link href={`/services/${service.slug}`} className="block h-full">
+                    <Card className="group flex h-full flex-col rounded-none border-2 border-deep-900 bg-white shadow-none transition-shadow duration-300 hover:shadow-xl">
                       <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-deep-900 text-primary-400 transition-all duration-300 group-hover:bg-sage-500 group-hover:text-deep-900 group-hover:shadow-[0_0_20px_rgba(86,149,120,0.55)]">
                         <ServiceIconAnimation icon={Icon} />
                       </div>
@@ -56,7 +56,7 @@ export function ServicesGrid() {
                       <p className="mb-4 text-sm text-deep-500">
                         {service.description}
                       </p>
-                      <span className="inline-flex items-center gap-1 text-sm font-semibold text-primary-600">
+                      <span className="mt-auto inline-flex items-center gap-1 text-sm font-semibold text-primary-600">
                         Learn more
                         <ArrowUpRight className="h-4 w-4" />
                       </span>

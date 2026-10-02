@@ -185,54 +185,69 @@ export const testimonials: Testimonial[] = [
 ];
 
 export const partners: Partner[] = [
-  { id: "p1", name: "Yes Bank" },
-  { id: "p2", name: "Standard Chartered" },
-  { id: "p3", name: "Deutsche Bank" },
-  { id: "p4", name: "Capital Float" },
-  { id: "p5", name: "Arohan" },
-  { id: "p6", name: "ITI Capital Ltd" },
-  { id: "p7", name: "IDFC Bank" },
-  { id: "p8", name: "Magma" },
-  { id: "p9", name: "Indiabulls IVL Finance" },
-  { id: "p10", name: "IndusInd Bank" },
-  { id: "p11", name: "Fullerton India" },
-  { id: "p12", name: "Bajaj Finserv" },
+  { id: "p1", name: "Yes Bank", logo: "/images/partners/yes-bank.png" },
+  { id: "p2", name: "Standard Chartered", logo: "/images/partners/standard-chartered.png" },
+  { id: "p3", name: "Deutsche Bank", logo: "/images/partners/deutsche-bank.png" },
+  { id: "p4", name: "Capital Float", logo: "/images/partners/capital-float.png" },
+  { id: "p5", name: "Arohan", logo: "/images/partners/arohan.jpg" },
+  { id: "p6", name: "ITI Capital Ltd", logo: "/images/partners/iti-capital.png" },
+  { id: "p7", name: "IDFC Bank", logo: "/images/partners/idfc-bank.png" },
+  { id: "p8", name: "Magma (now Poonawalla Fincorp)", logo: "/images/partners/poonawalla.svg" },
+  { id: "p9", name: "Indiabulls IVL Finance", logo: "/images/partners/indiabulls.png" },
+  { id: "p10", name: "IndusInd Bank", logo: "/images/partners/indusind-bank.png" },
+  { id: "p11", name: "Fullerton India (now SMFG India Credit)", logo: "/images/partners/smfg-india-credit.svg" },
+  { id: "p12", name: "Bajaj Finserv", logo: "/images/partners/bajaj-finserv.png" },
   { id: "p13", name: "Reliance Home Finance" },
-  { id: "p14", name: "Capital First" },
-  { id: "p15", name: "Tata Capital" },
+  { id: "p14", name: "Capital First", logo: "/images/partners/capital-first.png" },
+  { id: "p15", name: "Tata Capital", logo: "/images/partners/tata-capital.jpg" },
 ];
 
 export const teamMembers: TeamMember[] = [
   {
     id: "m1",
-    name: "Rajesh Malhotra",
-    role: "Founder & Managing Director",
-    bio: "With over 20 years in financial services, Rajesh founded Arena Financial Services to make trustworthy financial advice accessible to every household.",
+    name: "Vinod Kumar Tiwari",
+    role: "Managing Director, Arena Financial Services",
+    email: "vinod@tiwarifinserv.com",
+    bio: [
+      "Mr. Vinod Kumar Tiwari founded the organization in the year 2008 after being associated with various financial institutions and gaining rich experience in finance and Sales. His entrepreneurial abilities in accomplishing business growth on a consistent basis in a structured and unstructured environment have helped Arena Financial Services to reach unforeseen heights and exceed forecasted projections of profit and growth. With his continuous involvement, the company has shown exponential growth through strong corporate relationship and customer satisfaction.",
+      "He has adopted the integrity pledge and committed to upholding the highest standards of honesty & integrity. He is a man of exemplary vision & strong professional commitment having inherent qualities of converting challenges into blessings with his determination & involvement of team.",
+    ],
   },
   {
     id: "m2",
-    name: "Meera Kulkarni",
-    role: "Head of Lending",
-    bio: "Meera leads our loans division, having structured financing solutions for over 10,000 clients across personal and business segments.",
+    name: "Pramod Kumar Tiwari",
+    role: "Sales and Marketing Head, Arena Financial Services",
+    email: "pramod.afz@gmail.com",
+    bio: [
+      "Mr. Pramod Kumar Tiwari is a graduate from Saket University and is associated with Arena Financial Services since 2011. He is a proactive leader and planner with expertise in Sales and Marketing across urban and rural markets, customer lifecycle management, market execution, leading large Cross Functional transformational Projects, Cost engineering and mentoring young talent.",
+      "He has vast knowledge and experience in handling all kinds of loans like Business Loan, Personal Loan, Home Loan & Loan Against Property. Mr. Pramod maintains very good professional relations with all MNCs/Private Banks and NBFCs. With his motto to achieve long-term customer satisfaction, he is catering to the needs of customers across different fields and has involved the entire team to achieve the desired results.",
+    ],
   },
   {
     id: "m3",
-    name: "Arjun Malhotra",
-    role: "Head of Investments",
-    bio: "A certified financial planner, Arjun designs goal-based investment strategies focused on long-term, sustainable wealth creation.",
+    name: "Sanjay Tiwari",
+    role: "Business and IT Head, Arena Financial Services",
+    email: "ceo@tiwarifinserv.com",
+    bio: [
+      "Mr. Sanjay Tiwari is a post-graduate from VTU Belgavi Karnataka and is associated with Arena Financial Services since 2016. He is a proactive leader with expertise in Marketing and mentoring young talent.",
+      "He has vast knowledge with experience of conducting and handling the technical training on various platforms for aspirants in networking. He has helped to orchestrate the restructuring and reorganization of locations. His strong work ethic, technical knowledge, and leadership have helped Arena Financial Services to grow.",
+    ],
   },
   {
     id: "m4",
-    name: "Kavita Rao",
-    role: "Head of Insurance Advisory",
-    bio: "Kavita ensures every client finds the right protection plan, with a client-first approach to claims and policy servicing.",
+    name: "Ghata Shah",
+    role: "Co-founder, Secured Loans",
+    email: "ghatashah@tiwarifinserv.com",
+    bio: [
+      "Ms. Ghata Shah is basically from Gujarat and settled in Bangalore for more than a decade. She has completed her Master's in Commerce from Gujarat University and associated with Arena Financial Services since 2019 for the Secured vertical. She has also availed a Law degree and is currently pursuing her Final Chartered Accountancy course.",
+      "She has worked in various industries including credit/lending industry. She has rich experience in the entire gamut of accounting & finance operations which supports clients to improve their financial costs. She is a results-oriented, versatile, and creative leader with over twenty years of accounting as well as Banking experience which helps Arena Financial Services to grow.",
+    ],
   },
-  {
-    id: "m5",
-    name: "Sandeep Verma",
-    role: "Head of Customer Success",
-    bio: "Sandeep and his team manage the end-to-end client experience, from onboarding through to post-disbursal support.",
-  },
+];
+
+export const financialConsultants: { id: string; name: string; role: string }[] = [
+  { id: "c1", name: "Vivek Tiwari", role: "Team Lead, Sales and Marketing" },
+  { id: "c2", name: "Suraj Tiwari", role: "Team Lead, Sales and Marketing" },
 ];
 
 export const faqItems: FaqItem[] = [

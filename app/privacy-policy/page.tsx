@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 export default function PrivacyPolicyPage() {
   return (
     <>
-      <section className="bg-deep-900 pb-14 pt-28">
+      <section className="bg-deep-900 pb-10 pt-24">
         <Container className="flex flex-col items-center gap-6 text-center">
           <span className="text-sm font-bold uppercase tracking-widest text-primary-400">
             Legal
@@ -20,7 +20,7 @@ export default function PrivacyPolicyPage() {
         </Container>
       </section>
 
-      <section className="bg-white py-14">
+      <section className="bg-white py-10">
         <Container className="mx-auto max-w-3xl">
           <p className="text-deep-600">
             This is placeholder content. Arena Financial Services&apos; full

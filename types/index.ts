@@ -24,13 +24,16 @@ export interface Testimonial {
 export interface Partner {
   id: string;
   name: string;
+  /** Path under /public, e.g. /images/partners/yes-bank.svg. Omit for text fallback. */
+  logo?: string;
 }
 
 export interface TeamMember {
   id: string;
   name: string;
   role: string;
-  bio: string;
+  bio: string[];
+  email: string;
 }
 
 export interface FaqItem {

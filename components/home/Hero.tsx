@@ -9,24 +9,15 @@ import { HeroAnimation } from "@/components/hero/HeroAnimation";
 import { HeroDashboardCard } from "@/components/hero/HeroDashboardCard";
 import { HeroFloatingShape } from "@/components/hero/HeroFloatingShape";
 import { HeroGlow } from "@/components/hero/HeroGlow";
-import { SectionVideoBackground } from "@/components/video/SectionVideoBackground";
+import { HeroLoanScene } from "@/components/hero/HeroLoanScene";
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden bg-deep-alt2 pb-20 pt-32">
-      {/* Background video — HeroGlow's wash + vignette (stacked on top)
-          handle text legibility, so the video itself stays at a clearly
-          visible opacity with NO blend-mode override: mix-blend-screen
-          against a dark backdrop mathematically suppresses dark/mid-tone
-          footage (screen blend of a near-black layer barely lightens
-          anything), which was the main reason the video read as almost
-          invisible before. */}
-      <SectionVideoBackground
-        src="/videos/finance_video_2.mp4"
-        videoClassName="opacity-65"
-        overlayClassName="bg-transparent"
-        posterClassName="bg-transparent"
-      />
+    <section className="relative overflow-hidden bg-deep-alt2 pb-14 pt-32">
+      {/* Loan/banking-themed motifs (house, handshake, approved document)
+          replace the old stock-footage video, which read as trading/crypto. */}
+      <div className="absolute inset-0 bg-deep-900" />
+      <HeroLoanScene />
       <HeroGlow />
       <HeroAnimation showMesh={false} />
       <HeroFloatingShape />
@@ -81,7 +72,7 @@ export function Hero() {
             size="lg"
             className="border-white/40 uppercase tracking-wide text-white hover:bg-white hover:text-deep-900"
           >
-            Explore Services
+            Explore Finance & Solutions
           </Button>
         </motion.div>
 

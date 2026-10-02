@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      <section className="relative overflow-hidden bg-deep-900 pb-14 pt-28">
+      <section className="relative overflow-hidden bg-deep-900 pb-10 pt-24">
         <SectionVideoBackground src="/videos/finance_video_2.mp4" />
         <Container className="relative z-10 flex flex-col items-center gap-6 text-center">
           <span className="text-sm font-bold uppercase tracking-widest text-primary-400">
@@ -31,14 +31,14 @@ export default function ContactPage() {
         </Container>
       </section>
 
-      <section className="relative overflow-hidden bg-mint py-16">
+      <section className="relative overflow-hidden bg-mint py-10">
         <FormAmbientGlow />
         <Container className="relative z-10">
           <LoanApplicationForm />
         </Container>
       </section>
 
-      <section className="bg-white py-12">
+      <section className="bg-white py-8">
         <Container className="flex flex-col gap-6">
           <div className="flex items-start gap-4 rounded-2xl bg-mint p-5 shadow-sm">
             <MapPin className="mt-1 h-5 w-5 shrink-0 text-primary-500" />

@@ -39,7 +39,7 @@ export function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="relative scroll-mt-24 overflow-hidden bg-mint py-16"
+      className="relative scroll-mt-24 overflow-hidden bg-mint py-10"
     >
       <DriftingGlow />
       <SecureGrid />

@@ -9,7 +9,7 @@ import {
   useTransform,
   type Variants,
 } from "framer-motion";
-import { LineChart, ShieldCheck, IndianRupee, TrendingUp } from "lucide-react";
+import { Calculator, Home, ShieldCheck, IndianRupee } from "lucide-react";
 
 /**
  * Standalone, swappable hero background: particle-network mesh + floating
@@ -164,11 +164,11 @@ export function HeroAnimation({ showMesh = true }: { showMesh?: boolean }) {
       content: (
         <>
           <div className="flex items-center gap-2 text-emerald-300">
-            <TrendingUp className="h-4 w-4" />
-            <span className="text-xs font-semibold">Portfolio Growth</span>
+            <Calculator className="h-4 w-4" />
+            <span className="text-xs font-semibold">Monthly EMI</span>
           </div>
           <p className="mt-1 font-display text-lg font-bold text-white">
-            +24.6%
+            ₹26,850
           </p>
         </>
       ),
@@ -185,7 +185,7 @@ export function HeroAnimation({ showMesh = true }: { showMesh?: boolean }) {
             <span className="text-xs font-semibold">Loan Approved</span>
           </div>
           <p className="mt-1 font-display text-lg font-bold text-white">
-            â‚¹12,50,000
+            ₹12,50,000
           </p>
         </>
       ),
@@ -198,20 +198,10 @@ export function HeroAnimation({ showMesh = true }: { showMesh?: boolean }) {
       content: (
         <>
           <div className="flex items-center gap-2 text-sky-300">
-            <LineChart className="h-4 w-4" />
-            <span className="text-xs font-semibold">Market Trend</span>
+            <Home className="h-4 w-4" />
+            <span className="text-xs font-semibold">Home Loan @ 8.5%</span>
           </div>
-          <svg viewBox="0 0 80 28" className="mt-2 h-7 w-20">
-            <polyline
-              points="0,24 12,18 24,20 36,10 48,13 60,4 72,7 80,2"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="text-emerald-300"
-            />
-          </svg>
+          <p className="mt-1 text-xs text-deep-100">Sanctioned in 48 hrs</p>
         </>
       ),
     },

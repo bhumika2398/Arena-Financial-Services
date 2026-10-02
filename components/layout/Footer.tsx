@@ -9,8 +9,9 @@ import { services } from "@/lib/data";
 
 const quickLinks = [
   { href: "/about", label: "About Us" },
-  { href: "/services", label: "Services" },
-  { href: "/#faq", label: "FAQ" },
+  { href: "/services", label: "Finance & Solutions" },
+  { href: "/testimonials", label: "Testimonials" },
+  { href: "/faq", label: "FAQ" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -49,7 +50,7 @@ export function Footer() {
         aria-hidden
         className="pointer-events-none absolute inset-0 opacity-[0.06] [background:repeating-linear-gradient(105deg,rgba(205,243,227,0.5)_0px,rgba(205,243,227,0.5)_2px,transparent_2px,transparent_130px)] motion-safe:animate-ray-sweep"
       />
-      <Container className="relative z-10 grid gap-10 py-12 md:grid-cols-2 lg:grid-cols-4">
+      <Container className="relative z-10 grid gap-6 py-8 md:grid-cols-2 lg:grid-cols-4">
         <div className="flex flex-col gap-4">
           <span className="inline-flex w-fit items-center rounded-xl bg-white/95 px-2.5 py-1.5 shadow-sm">
             <Image
@@ -95,7 +96,7 @@ export function Footer() {
 
         <div>
           <h3 className="mb-4 font-display text-base font-bold text-white">
-            Services
+            Business Finance & Solutions
           </h3>
           <ul className="flex flex-col gap-3 text-sm">
             {services.slice(0, 6).map((service) => (
@@ -156,7 +157,7 @@ export function Footer() {
               <Mail className="h-4 w-4 shrink-0 text-primary-500" />
               <a
                 href="mailto:vinod@tiwarifinserv.com"
-                className="hover:text-primary-400"
+                className="font-semibold text-primary-400 hover:text-primary-300 hover:underline"
               >
                 vinod@tiwarifinserv.com
               </a>
@@ -165,10 +166,20 @@ export function Footer() {
         </div>
       </Container>
 
-      <div className="border-t border-deep-800 py-6">
-        <Container className="flex flex-col items-center justify-between gap-2 text-xs text-deep-400 sm:flex-row">
+      <div className="border-t border-deep-800 py-4">
+        <Container className="flex flex-col items-center justify-between gap-2 text-center text-sm text-deep-300 sm:flex-row sm:text-left sm:text-base">
           <span>© {new Date().getFullYear()} Arena Financial Services. All rights reserved.</span>
-          <span>Placeholder content for demonstration purposes only.</span>
+          <span>
+            Designed &amp; Developed by{" "}
+            <a
+              href="https://www.naazailabs.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-primary-400 hover:text-primary-300 hover:underline"
+            >
+              Naaz AI Labs
+            </a>
+          </span>
         </Container>
       </div>
     </footer>

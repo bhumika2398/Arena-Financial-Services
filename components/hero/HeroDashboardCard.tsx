@@ -32,7 +32,7 @@ export function HeroDashboardCard() {
               Loan Application
             </p>
             <p className="font-display text-sm font-bold text-white sm:text-base">
-              #TFS-2024-8821
+              #AFS-2024-8821
             </p>
           </div>
           <span className="inline-flex items-center gap-1.5 rounded-full bg-primary-500/15 px-3 py-1 text-xs font-semibold text-primary-300">

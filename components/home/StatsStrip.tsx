@@ -37,7 +37,7 @@ export function StatsStrip() {
   return (
     <section
       ref={ref}
-      className="relative overflow-hidden border-y-4 border-primary-500/70 bg-deep-alt1 py-12"
+      className="relative overflow-hidden border-y-4 border-primary-500/70 bg-deep-alt1 py-8"
     >
       <StatsGlow />
       {/* Architectural grid-line texture, same repeating-linear-gradient technique as HeroGlow */}

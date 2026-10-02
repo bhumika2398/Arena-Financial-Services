@@ -22,12 +22,12 @@ export function ServiceDetailSection({
     <section
       id={service.slug}
       className={cn(
-        "relative scroll-mt-24 overflow-hidden py-14",
+        "relative scroll-mt-24 overflow-hidden py-10",
         bare ? "bg-white" : reverse ? "bg-mint" : "bg-white",
       )}
     >
       <FlowingGradient />
-      <Container className="relative z-10 grid items-center gap-12 lg:grid-cols-2">
+      <Container className="relative z-10 grid items-center gap-8 lg:grid-cols-2">
         <div className={cn(reverse && "lg:order-2")}>
           <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-deep-900 text-primary-400">
             {Icon ? <Icon className="h-7 w-7" /> : null}

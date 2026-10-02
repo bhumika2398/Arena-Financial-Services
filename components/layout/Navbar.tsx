@@ -15,9 +15,10 @@ import { cn } from "@/lib/utils";
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
-  { href: "/services", label: "Services" },
-  { href: "/#testimonials", label: "Testimonials" },
-  { href: "/#faq", label: "FAQ" },
+  { href: "/why-arena", label: "Why Arena" },
+  { href: "/services", label: "Finance & Solutions" },
+  { href: "/testimonials", label: "Testimonials" },
+  { href: "/faq", label: "FAQ" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -226,6 +227,7 @@ export function Navbar() {
                 </span>
                 <button
                   type="button"
+                  className="-m-2 p-2"
                   aria-label="Close menu"
                   onClick={() => setOpen(false)}
                 >
@@ -239,7 +241,7 @@ export function Navbar() {
                       <button
                         type="button"
                         onClick={() => setMobileServicesOpen((v) => !v)}
-                        className="flex items-center justify-between text-base font-semibold text-deep-700 hover:text-primary-600"
+                        className="flex min-h-11 items-center justify-between text-base font-semibold text-deep-700 hover:text-primary-600"
                       >
                         {link.label}
                         <ChevronDown
@@ -282,7 +284,7 @@ export function Navbar() {
                         handleSectionLinkClick(e, link.href);
                       }}
                       scroll={!link.href.startsWith("/#")}
-                      className="text-base font-semibold text-deep-700 hover:text-primary-600"
+                      className="flex min-h-11 items-center text-base font-semibold text-deep-700 hover:text-primary-600"
                     >
                       {link.label}
                     </Link>

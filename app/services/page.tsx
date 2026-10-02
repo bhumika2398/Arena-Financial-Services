@@ -7,7 +7,7 @@ import { SectionVideoBackground } from "@/components/video/SectionVideoBackgroun
 import { services } from "@/lib/data";
 
 export const metadata: Metadata = {
-  title: "Services",
+  title: "Business Finance & Solutions",
   description:
     "Explore Arena Financial Services' full range of financial products — personal, business, home, and SME loans, loan against property, overdraft, term loans, and more.",
 };
@@ -19,11 +19,11 @@ const loanServices = services.filter((s) => s.slug !== "emi-calculator");
 export default function ServicesPage() {
   return (
     <>
-      <section className="relative overflow-hidden bg-deep-900 pb-14 pt-28">
+      <section className="relative overflow-hidden bg-deep-900 pb-10 pt-24">
         <SectionVideoBackground src="/videos/finance_video_4.mp4" />
         <Container className="relative z-10 flex flex-col items-center gap-6 text-center">
           <span className="text-sm font-bold uppercase tracking-widest text-primary-400">
-            Our Services
+            Business Finance & Solutions
           </span>
           <h1 className="max-w-3xl text-balance font-display text-4xl font-bold tracking-tight text-white sm:text-5xl">
             Financial Products for Every Stage of Life
@@ -43,7 +43,7 @@ export default function ServicesPage() {
         />
       ))}
 
-      <section className="bg-deep-900 py-12">
+      <section className="bg-deep-900 py-8">
         <Container className="flex flex-col items-center gap-6 text-center">
           <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-primary-500/15 text-primary-400">
             <Calculator className="h-7 w-7" />

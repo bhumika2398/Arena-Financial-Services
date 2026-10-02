@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function EmiCalculatorPage() {
   return (
     <>
-      <section className="bg-deep-900 pb-14 pt-28">
+      <section className="bg-deep-900 pb-10 pt-24">
         <Container className="flex flex-col items-center gap-6 text-center">
           <span className="text-sm font-bold uppercase tracking-widest text-primary-400">
             EMI Calculator
@@ -28,7 +28,7 @@ export default function EmiCalculatorPage() {
         </Container>
       </section>
 
-      <section className="relative overflow-hidden bg-white py-14">
+      <section className="relative overflow-hidden bg-white py-10">
         <CalculatorPulse />
         <Container className="relative z-10 mx-auto max-w-4xl">
           <EmiCalculator />
@@ -41,7 +41,7 @@ export default function EmiCalculatorPage() {
             href="/services"
             className="text-sm font-semibold text-deep-600 hover:text-primary-600"
           >
-            &larr; Back to all services
+            &larr; Back to all finance & solutions
           </Link>
         </Container>
       </section>

@@ -5,8 +5,13 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 const SESSION_KEY = "tf-preloader-shown";
-const MIN_DURATION_MS = 1800;
-const MAX_EXTRA_WAIT_MS = 1000;
+// Used only when there is no video to wait on (reduced motion / video error).
+const NO_VIDEO_DURATION_MS = 1800;
+// finance_video_5.mp4 runs ~10.07s. The video's real "ended" event is the
+// primary trigger; this is ONLY a safety net so a stalled/broken video can
+// never trap users on the preloader. It must exceed the video length plus
+// buffering time, otherwise it would cut the video short.
+const SAFETY_TIMEOUT_MS = 14000;
 
 export function Preloader() {
   const prefersReducedMotion = useReducedMotion();
@@ -14,9 +19,7 @@ export function Preloader() {
   // true/false once we know whether to render it at all.
   const [shouldRender, setShouldRender] = useState<boolean | null>(null);
   const [visible, setVisible] = useState(true);
-  const [videoReady, setVideoReady] = useState(false);
   const [videoFailed, setVideoFailed] = useState(false);
-  const [minTimeElapsed, setMinTimeElapsed] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   // NOTE for local testing: this only ever shows once per browser TAB
@@ -61,32 +64,21 @@ export function Preloader() {
       // Non-fatal — worst case the preloader replays once more.
     }
 
-    const duration = prefersReducedMotion ? 300 : MIN_DURATION_MS;
-    const timer = setTimeout(() => setMinTimeElapsed(true), duration);
-    return () => clearTimeout(timer);
-  }, [prefersReducedMotion]);
+  }, []);
 
-  // Reduced motion (or no video at all) never waits on video readiness.
+  // Safety net + no-video path. With a playing video, the 'ended' event
+  // (see onEnded below) dismisses the preloader; this timer only fires if
+  // that never happens.
   useEffect(() => {
-    if (prefersReducedMotion) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setVideoReady(true);
-    }
-  }, [prefersReducedMotion]);
-
-  // Once the minimum display time has elapsed, either dismiss immediately
-  // (video already ready / reduced motion) or wait a short capped extra
-  // window for the video before dismissing regardless.
-  useEffect(() => {
-    if (!minTimeElapsed) return;
-    if (videoReady) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (!shouldRender) return;
+    const ms =
+      prefersReducedMotion || videoFailed ? NO_VIDEO_DURATION_MS : SAFETY_TIMEOUT_MS;
+    const timer = setTimeout(() => {
+      console.warn("[Preloader] dismissing via timeout after", ms, "ms (video 'ended' did not fire)");
       setVisible(false);
-      return;
-    }
-    const timer = setTimeout(() => setVisible(false), MAX_EXTRA_WAIT_MS);
+    }, prefersReducedMotion ? 300 : ms);
     return () => clearTimeout(timer);
-  }, [minTimeElapsed, videoReady]);
+  }, [shouldRender, prefersReducedMotion, videoFailed]);
 
   // Belt-and-suspenders autoplay fix: the `autoPlay` HTML attribute can be
   // silently ignored by the browser (no `error` event fires at all — this
@@ -149,16 +141,16 @@ export function Preloader() {
               ref={videoRef}
               autoPlay
               muted
+              preload="auto"
               loop={false}
               playsInline
               onLoadStart={() => console.log("[Preloader video] loadstart — browser began fetching the file")}
-              onCanPlay={() => {
-                console.log("[Preloader video] canplay — file loaded enough to play");
-                setVideoReady(true);
-              }}
-              onLoadedData={() => {
-                console.log("[Preloader video] loadeddata — first frame decoded");
-                setVideoReady(true);
+              onCanPlay={() => console.log("[Preloader video] canplay — file loaded enough to play")}
+              onLoadedData={() => console.log("[Preloader video] loadeddata — first frame decoded")}
+              onWaiting={() => console.log("[Preloader video] waiting — buffering")}
+              onEnded={() => {
+                console.log("[Preloader video] ended — playback finished, revealing site");
+                setVisible(false);
               }}
               onPlaying={() => console.log("[Preloader video] playing — actually rendering frames now")}
               onError={(e) => {
@@ -178,7 +170,6 @@ export function Preloader() {
                 // complete preloader on their own (this is exactly what
                 // reduced-motion users already see).
                 setVideoFailed(true);
-                setVideoReady(true);
               }}
               className="absolute inset-0 h-full w-full object-cover"
               src="/videos/finance_video_5.mp4"

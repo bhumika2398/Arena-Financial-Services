@@ -8,7 +8,7 @@ import { processSteps } from "@/lib/data";
 
 export function ProcessTimeline() {
   return (
-    <section className="relative overflow-hidden bg-white py-16">
+    <section className="relative overflow-hidden bg-white py-10">
       {/* Architectural blueprint grid-line texture, same technique as HeroGlow/StatsStrip */}
       <div
         aria-hidden
@@ -18,7 +18,7 @@ export function ProcessTimeline() {
             "repeating-linear-gradient(0deg, rgba(1,63,74,0.6) 0px, rgba(1,63,74,0.6) 1px, transparent 1px, transparent 64px), repeating-linear-gradient(90deg, rgba(1,63,74,0.6) 0px, rgba(1,63,74,0.6) 1px, transparent 1px, transparent 64px)",
         }}
       />
-      <Container className="relative z-10 flex flex-col gap-12">
+      <Container className="relative z-10 flex flex-col gap-8">
         <SectionHeading
           eyebrow="How It Works"
           title="Four Simple Steps to Get Started"
@@ -30,7 +30,7 @@ export function ProcessTimeline() {
           <div className="absolute left-6 top-0 hidden h-full w-px bg-deep-100 md:left-0 md:top-6 md:h-px md:w-full" />
           <TimelinePath steps={processSteps.length} />
 
-          <div className="grid gap-10 md:grid-cols-4">
+          <div className="grid gap-6 md:grid-cols-4">
             {processSteps.map((step, i) => (
               <motion.div
                 key={step.id}

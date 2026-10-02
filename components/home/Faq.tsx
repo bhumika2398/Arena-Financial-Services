@@ -15,7 +15,7 @@ export function Faq() {
   return (
     <section
       id="faq"
-      className="relative scroll-mt-24 overflow-hidden bg-mint py-16"
+      className="relative scroll-mt-24 overflow-hidden bg-mint py-10"
     >
       {/* Subtle animated grain texture for a bit of tactile depth */}
       <svg className="pointer-events-none absolute inset-0 h-full w-full opacity-[0.035]" aria-hidden>

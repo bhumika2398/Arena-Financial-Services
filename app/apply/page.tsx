@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function ApplyPage() {
   return (
     <>
-      <section className="bg-deep-900 pb-14 pt-28">
+      <section className="bg-deep-900 pb-10 pt-24">
         <Container className="flex flex-col items-center gap-6 text-center">
           <span className="text-sm font-bold uppercase tracking-widest text-primary-400">
             Apply Now
@@ -27,7 +27,7 @@ export default function ApplyPage() {
         </Container>
       </section>
 
-      <section className="relative overflow-hidden bg-mint py-16">
+      <section className="relative overflow-hidden bg-mint py-10">
         <FormAmbientGlow />
         <Container className="relative z-10">
           <LoanApplicationForm />

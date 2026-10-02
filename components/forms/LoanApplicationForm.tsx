@@ -117,27 +117,7 @@ export function LoanApplicationForm() {
 
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)]">
         {/* Left column: contact info */}
-        <div className="flex flex-col gap-6 rounded-2xl bg-deep-900 p-8 text-white">
-          <div>
-            <p className="text-sm text-deep-200">
-              Alternatively please call for immediate response.
-            </p>
-            <div className="mt-3 flex flex-col gap-1">
-              <a
-                href="tel:+919972718696"
-                className="font-display text-2xl font-bold text-primary-400 hover:text-primary-300"
-              >
-                9972718696
-              </a>
-              <a
-                href="tel:+919972908696"
-                className="font-display text-2xl font-bold text-primary-400 hover:text-primary-300"
-              >
-                9972908696
-              </a>
-            </div>
-          </div>
-
+        <div className="flex flex-col gap-6 rounded-2xl bg-deep-900 p-5 text-white sm:p-8">
           <div>
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-deep-200">
               We are Open at
@@ -163,6 +143,9 @@ export function LoanApplicationForm() {
           </div>
 
           <div className="flex flex-col gap-4 border-t border-white/10 pt-6">
+            <p className="text-sm font-semibold uppercase tracking-widest text-deep-200">
+              Reach us directly
+            </p>
             <div className="flex items-start gap-3">
               <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-primary-400" />
               <p className="text-sm text-deep-200">
@@ -197,7 +180,7 @@ export function LoanApplicationForm() {
         </div>
 
         {/* Right column: form */}
-        <div className="rounded-2xl border border-white/40 bg-white/70 p-8 shadow-sm backdrop-blur-sm sm:backdrop-blur-md">
+        <div className="rounded-2xl border border-white/40 bg-white/70 p-5 shadow-sm sm:p-8 backdrop-blur-sm sm:backdrop-blur-md">
           {isSubmitSuccessful ? (
             <motion.div
               initial={{ opacity: 0, y: 10 }}
@@ -332,7 +315,7 @@ export function LoanApplicationForm() {
                   <input
                     type="checkbox"
                     {...register("consentContact")}
-                    className="mt-0.5 h-4 w-4 shrink-0 rounded border-deep-300 text-primary-600 focus:ring-primary-500"
+                    className="mt-0.5 h-5 w-5 shrink-0 rounded border-deep-300 text-primary-600 focus:ring-primary-500"
                   />
                   <span>I authorise Arena Finserv to contact me for future Conversations</span>
                 </label>
@@ -346,7 +329,7 @@ export function LoanApplicationForm() {
                   <input
                     type="checkbox"
                     {...register("consentPolicy")}
-                    className="mt-0.5 h-4 w-4 shrink-0 rounded border-deep-300 text-primary-600 focus:ring-primary-500"
+                    className="mt-0.5 h-5 w-5 shrink-0 rounded border-deep-300 text-primary-600 focus:ring-primary-500"
                   />
                   <span>
                     By accepting here you agree to Arena Finserv&apos;s Borrower Consent,{" "}
