@@ -18,7 +18,6 @@ const navLinks = [
   { href: "/why-arena", label: "Why Arena" },
   { href: "/services", label: "Finance & Solutions" },
   { href: "/testimonials", label: "Testimonials" },
-  { href: "/faq", label: "FAQ" },
   { href: "/contact", label: "Contact" },
 ];
 

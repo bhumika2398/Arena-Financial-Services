@@ -36,7 +36,7 @@ export function CtaBanner() {
                 Apply Now
                 <ArrowRight className="h-5 w-5" />
               </Button>
-              <Button href="/contact" size="lg" variant="flat">
+              <Button href="/contact" size="lg" variant="outlineLight">
                 Talk to an Advisor
               </Button>
             </div>

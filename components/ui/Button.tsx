@@ -4,18 +4,19 @@ import type { ButtonHTMLAttributes, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 rounded-full font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-400 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center gap-2 rounded-xl font-semibold tracking-[0.01em] transition-all duration-200 ease-out hover:-translate-y-px active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-400 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
         primary:
-          "bg-primary-500 text-deep-900 shadow-md hover:bg-primary-400 hover:shadow-lg active:bg-primary-600",
+          "bg-gradient-to-b from-primary-400 to-primary-500 text-deep-900 shadow-[0_6px_16px_-4px_rgba(6,133,98,0.55),inset_0_1px_0_rgba(255,255,255,0.35)] hover:brightness-110 hover:shadow-[0_10px_22px_-4px_rgba(6,133,98,0.65),inset_0_1px_0_rgba(255,255,255,0.35)] active:brightness-95",
         secondary:
-          "bg-deep-900 text-white shadow-md hover:bg-deep-800 active:bg-deep-950",
+          "bg-deep-900 text-white shadow-[0_6px_14px_-4px_rgba(1,63,74,0.5),inset_0_1px_0_rgba(255,255,255,0.12)] hover:bg-deep-800 hover:shadow-[0_10px_20px_-4px_rgba(1,63,74,0.55),inset_0_1px_0_rgba(255,255,255,0.12)] active:bg-deep-950",
         outline:
-          "border-2 border-deep-900 text-deep-900 hover:bg-deep-900 hover:text-white",
+          "border-2 border-deep-900 text-deep-900 hover:bg-deep-900 hover:text-white hover:shadow-md",
         ghost: "text-deep-900 hover:bg-deep-50",
-        flat: "rounded-none border-2 border-deep-900 bg-primary-500 text-deep-900 shadow-none hover:bg-primary-400 active:bg-primary-600",
+        outlineLight:
+          "border-2 border-white/35 bg-white/5 text-white backdrop-blur-sm hover:border-white/70 hover:bg-white/15 hover:shadow-[0_8px_20px_-6px_rgba(0,0,0,0.5)]",
       },
       size: {
         sm: "px-4 py-2 text-sm",

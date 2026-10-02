@@ -43,7 +43,7 @@ export function Faq() {
               <div
                 key={item.id}
                 className={cn(
-                  "overflow-hidden rounded-2xl border transition-colors duration-300",
+                  "overflow-hidden rounded-2xl border shadow-sm transition-all duration-300 hover:shadow-md",
                   isOpen
                     ? "border-white/40 bg-white/50 backdrop-blur-sm sm:backdrop-blur-md"
                     : "border-deep-100 bg-white hover:border-white/40 hover:bg-white/50 hover:backdrop-blur-sm",

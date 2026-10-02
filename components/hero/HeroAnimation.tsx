@@ -158,7 +158,7 @@ export function HeroAnimation({ showMesh = true }: { showMesh?: boolean }) {
   const cards: FloatCard[] = [
     {
       key: "growth",
-      className: "left-[6%] top-[18%] sm:left-[10%]",
+      className: "left-[2%] top-[16%] sm:left-[1.5%]",
       floatClass: "animate-float",
       depth: 18,
       content: (
@@ -175,7 +175,7 @@ export function HeroAnimation({ showMesh = true }: { showMesh?: boolean }) {
     },
     {
       key: "approved",
-      className: "right-[8%] top-[10%] sm:right-[12%]",
+      className: "right-[2%] top-[16%] sm:right-[1.5%]",
       floatClass: "animate-float-slow",
       depth: 26,
       content: (

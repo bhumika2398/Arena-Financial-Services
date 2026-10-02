@@ -6,14 +6,14 @@ import { useEffect, useRef, useState } from "react";
 
 const SESSION_KEY = "tf-preloader-shown";
 // Playback speed for the preloader video (1 = real time).
-const PLAYBACK_RATE = 1.35;
+const PLAYBACK_RATE = 1.75;
 // Used only when there is no video to wait on (reduced motion / video error).
 const NO_VIDEO_DURATION_MS = 1800;
-// finance_video_5.mp4 runs ~10.07s at 1x, i.e. ~7.5s at PLAYBACK_RATE. The video's real "ended" event is the
+// finance_video_5.mp4 runs ~10.07s at 1x, i.e. ~5.75s at PLAYBACK_RATE. The video's real "ended" event is the
 // primary trigger; this is ONLY a safety net so a stalled/broken video can
 // never trap users on the preloader. It must exceed the video length plus
 // buffering time, otherwise it would cut the video short.
-const SAFETY_TIMEOUT_MS = 12000;
+const SAFETY_TIMEOUT_MS = 8000;
 
 export function Preloader() {
   const prefersReducedMotion = useReducedMotion();

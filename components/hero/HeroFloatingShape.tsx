@@ -48,13 +48,16 @@ function RotatingIcosahedron({ reduceMotion }: { reduceMotion: boolean }) {
   return (
     <mesh ref={meshRef}>
       <icosahedronGeometry args={[1.4, 0]} />
-      <meshStandardMaterial
-        color="#068562"
+      <meshPhysicalMaterial
+        color="#34b98a"
         emissive="#068562"
-        emissiveIntensity={0.6}
-        metalness={0.7}
-        roughness={0.25}
-        wireframe={false}
+        emissiveIntensity={0.25}
+        metalness={0.1}
+        roughness={0.12}
+        clearcoat={1}
+        clearcoatRoughness={0.1}
+        transparent
+        opacity={0.55}
       />
     </mesh>
   );
@@ -84,7 +87,7 @@ export function HeroFloatingShape() {
     return (
       <div
         aria-hidden
-        className="pointer-events-none absolute right-[8%] top-[6%] h-32 w-32 rounded-full bg-primary-500/25 blur-2xl sm:h-40 sm:w-40"
+        className="pointer-events-none absolute right-[8%] top-[22%] h-32 w-32 rounded-full bg-primary-500/25 blur-2xl sm:h-40 sm:w-40"
       />
     );
   }
@@ -92,7 +95,7 @@ export function HeroFloatingShape() {
   return (
     <div
       aria-hidden
-      className="pointer-events-none absolute right-[4%] top-[2%] h-56 w-56 opacity-90 sm:right-[8%] sm:h-64 sm:w-64 lg:h-72 lg:w-72"
+      className="pointer-events-none absolute right-[2%] top-[34%] h-44 w-44 opacity-90 sm:right-[3%] sm:h-52 sm:w-52 lg:h-56 lg:w-56"
     >
       <Canvas
         camera={{ position: [0, 0, 4.2], fov: 40 }}

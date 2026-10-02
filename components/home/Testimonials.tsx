@@ -43,7 +43,7 @@ export function Testimonials() {
     >
       <DriftingGlow />
       <SecureGrid />
-      <Container className="relative z-10 flex flex-col items-center gap-8">
+      <Container className="relative z-10 flex max-w-[88rem] flex-col items-center gap-8">
         <SectionHeading
           eyebrow="Client Stories"
           title="Trusted by Thousands of Clients"
@@ -51,9 +51,9 @@ export function Testimonials() {
         />
 
         {/* Desktop: 3-up grid of flip cards, staggered auto-flip */}
-        <div className="hidden w-full grid-cols-3 gap-6 sm:grid">
+        <div className="hidden w-full grid-cols-1 gap-6 sm:grid sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
           {sets[page].map((testimonial, i) => (
-            <div key={`${testimonial.id}-${page}`} className="h-72">
+            <div key={`${testimonial.id}-${page}`} className="h-80">
               <TestimonialFlipCard
                 testimonial={testimonial}
                 autoFlipDelay={i * 1300}

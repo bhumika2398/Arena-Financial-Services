@@ -68,9 +68,9 @@ export function Hero() {
           </Button>
           <Button
             href="/services"
-            variant="outline"
+            variant="outlineLight"
             size="lg"
-            className="border-white/40 uppercase tracking-wide text-white hover:bg-white hover:text-deep-900"
+            className="uppercase tracking-wide"
           >
             Explore Finance & Solutions
           </Button>
