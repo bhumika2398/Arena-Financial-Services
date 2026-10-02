@@ -1,4 +1,7 @@
-import { BookOpen, Handshake, MessageSquareText, Scale } from "lucide-react";
+"use client";
+
+import { motion, useReducedMotion } from "framer-motion";
+import { BookOpen, Handshake, Info, MessageSquareText, Scale } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 
 const steps = [
@@ -55,79 +58,109 @@ const features = [
   },
 ];
 
-/** Deliberately plain: text-led, no glow/glass, so it reads as serious and credible. */
-export function WhyArena() {
-  return (
-    <section className="bg-white py-8 sm:py-10">
-      <Container className="flex max-w-5xl flex-col gap-8 sm:gap-10">
-        <div className="flex max-w-3xl flex-col gap-3">
-          <h2 className="text-balance font-display text-3xl font-bold text-deep-900 sm:text-4xl">
-            Clear advice. No unnecessary complexity.
-          </h2>
-          <p className="text-lg leading-relaxed text-deep-500">
-            The financing process is confusing enough on its own. Arena&apos;s
-            job is to make the part before the application — and the
-            application itself — easier to understand and get through.
-          </p>
-        </div>
 
-        <div className="flex flex-col gap-5">
-          <h3 className="text-sm font-bold uppercase tracking-widest text-primary-600">
+const EASE = [0.22, 1, 0.36, 1] as const;
+
+/** Calm, understated: one-time scroll entrances and light hover states only. */
+export function WhyArena() {
+  const reduced = useReducedMotion();
+  const enter = (x: number, y: number, i: number) => ({
+    initial: reduced ? false : { opacity: 0, x, y },
+    whileInView: { opacity: 1, x: 0, y: 0 },
+    viewport: { once: true, margin: "-60px" },
+    transition: { duration: 0.5, ease: EASE, delay: reduced ? 0 : i * 0.1 },
+  });
+
+  return (
+    <>
+      {/* Four steps — connected vertical timeline */}
+      <section className="bg-white py-10">
+        <Container className="max-w-4xl">
+          <h2 className="mb-6 text-sm font-bold uppercase tracking-widest text-primary-600">
             Four things, in order
-          </h3>
-          <ol className="grid gap-x-8 gap-y-5 sm:grid-cols-2">
-            {steps.map((s) => (
-              <li key={s.step} className="flex gap-5 border-t border-deep-100 pt-4">
-                <span className="font-display text-2xl font-bold text-primary-600">
+          </h2>
+          <ol className="relative flex flex-col gap-4">
+            <span
+              aria-hidden
+              className="absolute bottom-6 left-[1.6rem] top-6 w-px bg-deep-200 sm:left-[2.1rem]"
+            />
+            {steps.map((s, i) => (
+              <motion.li
+                key={s.step}
+                {...enter(-16, 0, i)}
+                className="relative flex gap-4 sm:gap-6"
+              >
+                <span className="relative z-10 flex h-[3.25rem] w-[3.25rem] shrink-0 items-center justify-center rounded-full border-2 border-primary-500/60 bg-white font-display text-lg font-bold text-primary-600 sm:h-[4.25rem] sm:w-[4.25rem] sm:text-2xl">
                   {s.step}
                 </span>
-                <div>
-                  <h4 className="mb-1 font-display text-lg font-bold text-deep-900">
+                <div className="flex-1 rounded-xl border border-deep-100 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-primary-300 hover:shadow-md sm:p-5">
+                  <h3 className="mb-1 font-display text-lg font-bold text-deep-900">
                     {s.title}
-                  </h4>
+                  </h3>
                   <p className="text-sm leading-relaxed text-deep-500">
                     {s.description}
                   </p>
                 </div>
-              </li>
+              </motion.li>
             ))}
           </ol>
-        </div>
+        </Container>
+      </section>
 
-        <div className="flex flex-col gap-5">
-          <h3 className="text-sm font-bold uppercase tracking-widest text-primary-600">
+      {/* Four features — equal-height cards */}
+      <section className="border-t border-deep-100 bg-mint py-10">
+        <Container className="max-w-4xl">
+          <h2 className="mb-6 text-sm font-bold uppercase tracking-widest text-primary-600">
             What makes the experience different
-          </h3>
-          <div className="grid gap-x-8 gap-y-5 sm:grid-cols-2">
-            {features.map((f) => (
-              <div key={f.title} className="flex gap-4">
-                <f.icon className="mt-0.5 h-6 w-6 shrink-0 text-deep-700" strokeWidth={1.5} />
-                <div>
-                  <h4 className="mb-1 font-display text-lg font-bold text-deep-900">
-                    {f.title}
-                  </h4>
-                  <p className="text-sm leading-relaxed text-deep-500">
-                    {f.description}
-                  </p>
+          </h2>
+          <div className="grid items-stretch gap-4 sm:grid-cols-2">
+            {features.map((f, i) => (
+              <motion.div
+                key={f.title}
+                {...enter(0, 16, i)}
+                className="flex h-full flex-col gap-3 rounded-xl border border-deep-100 bg-white p-5 transition-shadow duration-300 hover:shadow-lg"
+              >
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-deep-900 text-primary-400">
+                  <f.icon className="h-6 w-6" strokeWidth={1.75} />
                 </div>
-              </div>
+                <h3 className="font-display text-lg font-bold text-deep-900">
+                  {f.title}
+                </h3>
+                <p className="text-sm leading-relaxed text-deep-500">
+                  {f.description}
+                </p>
+              </motion.div>
             ))}
           </div>
-        </div>
+        </Container>
+      </section>
 
-        <aside className="rounded-lg border border-deep-200 bg-deep-50/40 p-5 sm:p-6">
-          <h3 className="mb-3 font-display text-lg font-bold text-deep-900">
-            On numbers we cannot yet verify
-          </h3>
-          <p className="text-sm leading-relaxed text-deep-500">
-            You will not find customer counts, disbursal totals or success rates
-            on this site until they are verified. Where a figure would normally
-            sit, we have left it out rather than round something up. Trust
-            should come from how clearly the process is explained and how
-            straight the advice is — not from a statistic.
-          </p>
-        </aside>
-      </Container>
-    </section>
+      {/* Closing note */}
+      <section className="border-t border-deep-100 bg-white py-10">
+        <Container className="max-w-4xl">
+          <motion.aside
+            initial={reduced ? false : { opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="flex gap-4 rounded-xl border border-primary-200 bg-primary-50/60 p-5 sm:p-6"
+          >
+            <Info className="mt-0.5 h-6 w-6 shrink-0 text-primary-600" strokeWidth={1.75} />
+            <div>
+              <h2 className="mb-2 font-display text-lg font-bold text-deep-900">
+                On numbers we cannot yet verify
+              </h2>
+              <p className="text-sm leading-relaxed text-deep-500">
+                You will not find customer counts, disbursal totals or success rates
+                on this site until they are verified. Where a figure would normally
+                sit, we have left it out rather than round something up. Trust
+                should come from how clearly the process is explained and how
+                straight the advice is — not from a statistic.
+              </p>
+            </div>
+          </motion.aside>
+        </Container>
+      </section>
+    </>
   );
 }
