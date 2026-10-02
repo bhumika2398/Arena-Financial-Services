@@ -5,13 +5,15 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 const SESSION_KEY = "tf-preloader-shown";
+// Playback speed for the preloader video (1 = real time).
+const PLAYBACK_RATE = 1.35;
 // Used only when there is no video to wait on (reduced motion / video error).
 const NO_VIDEO_DURATION_MS = 1800;
-// finance_video_5.mp4 runs ~10.07s. The video's real "ended" event is the
+// finance_video_5.mp4 runs ~10.07s at 1x, i.e. ~7.5s at PLAYBACK_RATE. The video's real "ended" event is the
 // primary trigger; this is ONLY a safety net so a stalled/broken video can
 // never trap users on the preloader. It must exceed the video length plus
 // buffering time, otherwise it would cut the video short.
-const SAFETY_TIMEOUT_MS = 14000;
+const SAFETY_TIMEOUT_MS = 12000;
 
 export function Preloader() {
   const prefersReducedMotion = useReducedMotion();
@@ -92,6 +94,7 @@ export function Preloader() {
     const el = videoRef.current;
     if (!el) return;
     el.muted = true;
+    el.playbackRate = PLAYBACK_RATE;
     const playPromise = el.play();
     if (playPromise) {
       playPromise
@@ -144,6 +147,13 @@ export function Preloader() {
               preload="auto"
               loop={false}
               playsInline
+              onLoadedMetadata={(e) => {
+                e.currentTarget.playbackRate = PLAYBACK_RATE;
+              }}
+              onPlay={(e) => {
+                e.currentTarget.playbackRate = PLAYBACK_RATE;
+                console.log("[Preloader video] play — playbackRate set to", PLAYBACK_RATE);
+              }}
               onLoadStart={() => console.log("[Preloader video] loadstart — browser began fetching the file")}
               onCanPlay={() => console.log("[Preloader video] canplay — file loaded enough to play")}
               onLoadedData={() => console.log("[Preloader video] loadeddata — first frame decoded")}
