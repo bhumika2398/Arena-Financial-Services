@@ -111,6 +111,20 @@ export function Preloader() {
     }
   }, [shouldRender, prefersReducedMotion, videoFailed]);
 
+  // Tell the consent banner when the preloader is gone (or was never shown).
+  useEffect(() => {
+    const finished = shouldRender === false || (shouldRender === true && !visible);
+    if (!finished) return;
+    const t = setTimeout(
+      () => {
+        (window as unknown as { __preloaderDone?: boolean }).__preloaderDone = true;
+        window.dispatchEvent(new Event("arena:preloader-done"));
+      },
+      shouldRender === false ? 0 : 750,
+    );
+    return () => clearTimeout(t);
+  }, [shouldRender, visible]);
+
   // Lock scroll while the preloader is up so the page can't be scrolled
   // underneath it during the reveal sequence.
   useEffect(() => {
@@ -211,60 +225,20 @@ export function Preloader() {
           />
 
           <div className="relative flex flex-col items-center gap-5 px-6 text-center">
-            <div
-              className="flex items-center gap-4"
-              role="img"
-              aria-label="Arena Financial Services"
+            <motion.div
+              initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: prefersReducedMotion ? 0.3 : 0.8, ease: "easeOut" }}
             >
-              {/* Circular badge — fades/rotates in first */}
-              <motion.div
-                initial={
-                  prefersReducedMotion
-                    ? { opacity: 1 }
-                    : { opacity: 0, scale: 0.6, rotate: -60 }
-                }
-                animate={{ opacity: 1, scale: 1, rotate: 0 }}
-                transition={{
-                  duration: prefersReducedMotion ? 0.3 : 0.8,
-                  ease: "easeOut",
-                }}
-                className="flex h-14 w-14 items-center justify-center rounded-full bg-white/95 p-2 shadow-[0_0_30px_rgba(6,133,98,0.35)] sm:h-20 sm:w-20"
-              >
-                <Image
-                  src="/images/badge-256.png"
-                  alt=""
-                  aria-hidden="true"
-                  width={256}
-                  height={256}
-                  priority
-                  className="h-full w-full object-contain"
-                />
-              </motion.div>
-
-              {/* Wordmark — slides in beside the badge once it has settled */}
-              <motion.div
-                initial={
-                  prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: -16 }
-                }
-                animate={{ opacity: 1, x: 0 }}
-                transition={{
-                  duration: prefersReducedMotion ? 0.3 : 0.6,
-                  delay: prefersReducedMotion ? 0 : 0.55,
-                  ease: "easeOut",
-                }}
-                className="rounded-lg bg-white/95 px-2.5 py-1.5 shadow-sm"
-              >
-                <Image
-                  src="/images/wordmark.png"
-                  alt=""
-                  aria-hidden="true"
-                  width={230}
-                  height={19}
-                  priority
-                  className="h-4 w-auto sm:h-5"
-                />
-              </motion.div>
-            </div>
+              <Image
+                src="/images/logo-light.png"
+                alt="Arena Financial Services"
+                width={900}
+                height={467}
+                priority
+                className="h-28 w-auto sm:h-40"
+              />
+            </motion.div>
 
             {/* Animated underline that fills as the "load" progresses */}
             <div className="h-[2px] w-40 overflow-hidden rounded-full bg-mint/10 sm:w-56">

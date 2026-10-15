@@ -3,6 +3,7 @@ import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { ConsentBanner } from "@/components/consent/ConsentBanner";
 import { Preloader } from "@/components/preloader/Preloader";
 
 const inter = Inter({
@@ -49,6 +50,7 @@ export default function RootLayout({
         className={`${inter.variable} ${spaceGrotesk.variable} font-sans antialiased`}
       >
         <Preloader />
+        <ConsentBanner />
         <Navbar />
         <main>{children}</main>
         <Footer />

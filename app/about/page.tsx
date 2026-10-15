@@ -1,100 +1,90 @@
-﻿import type { Metadata } from "next";
-import { Compass, Target } from "lucide-react";
-import { StoryReveal } from "@/components/animations/StoryReveal";
-import { Card } from "@/components/ui/Card";
+import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import { TransparencySection } from "@/components/about/TransparencySection";
+import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import { SectionHeading } from "@/components/ui/SectionHeading";
-import { SectionVideoBackground } from "@/components/video/SectionVideoBackground";
-import { TeamSection } from "@/components/about/TeamSection";
-import { processSteps } from "@/lib/data";
+import { PHONES } from "@/lib/service-content";
 
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "Learn about Arena Financial Services' story, mission, and the leadership team behind our financial advisory services.",
+    "About Arena Financial Services: founded in 2008, our approach to transparency, and how the team has grown.",
 };
+
+// Dates come only from the founders' bios on the Team page.
+const journey = [
+  { year: "2008", text: "Arena Financial Services founded by Vinod Kumar Tiwari." },
+  { year: "2011", text: "Pramod Kumar Tiwari joins." },
+  { year: "2016", text: "Sanjay Tiwari joins." },
+  { year: "2019", text: "Ghata Shah joins, for the Secured vertical." },
+];
 
 export default function AboutPage() {
   return (
     <>
-      <section className="relative overflow-hidden bg-deep-900 pb-10 pt-24">
-        <SectionVideoBackground src="/videos/finance_video_1.mp4" />
-        <Container className="relative z-10 flex flex-col items-center gap-6 text-center">
-          <span className="text-sm font-bold uppercase tracking-widest text-primary-400">
-            Our Story
-          </span>
-          <h1 className="max-w-3xl text-balance font-display text-4xl font-bold tracking-tight text-white sm:text-5xl">
+      <section className="bg-deep-900 pb-10 pt-24">
+        <Container className="max-w-5xl">
+          <span className="text-sm font-bold uppercase tracking-widest text-primary-400">About</span>
+          <h1 className="mt-2 max-w-3xl text-balance font-display text-4xl font-bold tracking-tight text-white sm:text-5xl">
             Built on Trust, Driven by Your Financial Success
           </h1>
-          <p className="max-w-2xl text-balance text-lg text-deep-200">
-            Founded in 2008, Arena Financial Services has grown from a single-city
-            advisory desk into a trusted financial partner for tens of
-            thousands of individuals and businesses across the country.
+          <p className="mt-3 max-w-2xl text-lg text-deep-200">
+            Founded in 2008, Arena Financial Services helps you find the right bank or NBFC for your financing.
           </p>
         </Container>
       </section>
 
-      <section className="bg-white py-10">
-        <Container className="grid gap-8 md:grid-cols-2">
-          <Card className="flex flex-col gap-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-deep-900 text-primary-400">
-              <Target className="h-6 w-6" />
-            </div>
-            <h2 className="font-display text-2xl font-bold text-deep-900">
-              Our Mission
-            </h2>
-            <p className="text-deep-500">
-              To simplify access to loans, insurance, and investment products
-              through transparent advice and a genuinely client-first
-              process — helping every client make confident financial
-              decisions.
-            </p>
-          </Card>
-          <Card className="flex flex-col gap-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-deep-900 text-primary-400">
-              <Compass className="h-6 w-6" />
-            </div>
-            <h2 className="font-display text-2xl font-bold text-deep-900">
-              Our Vision
-            </h2>
-            <p className="text-deep-500">
-              To be the most trusted financial services partner in the
-              region, known for integrity, expertise, and long-term
-              relationships built on real outcomes.
-            </p>
-          </Card>
+      <TransparencySection />
+
+      <section className="border-t border-deep-100 bg-white py-8 sm:py-10">
+        <Container className="max-w-5xl">
+          <h2 className="mb-6 font-display text-3xl font-bold text-deep-900">Our journey</h2>
+          <ol className="ml-2 border-l-2 border-deep-200">
+            {journey.map((j) => (
+              <li key={j.year} className="relative flex flex-col gap-0.5 pb-6 pl-6 last:pb-0 sm:flex-row sm:items-baseline sm:gap-6">
+                <span aria-hidden className="absolute -left-[0.4rem] top-2 h-3 w-3 rounded-full border-2 border-primary-500 bg-white sm:top-3" />
+                <span className="w-16 shrink-0 font-display text-2xl font-bold tabular-nums text-primary-600">{j.year}</span>
+                <span className="text-deep-700">{j.text}</span>
+              </li>
+            ))}
+          </ol>
         </Container>
       </section>
 
-      <section className="relative overflow-hidden bg-mint py-10">
-        <StoryReveal />
-        <Container className="relative z-10 flex flex-col gap-8">
-          <SectionHeading
-            eyebrow="Our Journey"
-            title="Milestones Along the Way"
-          />
-          <div className="relative">
-            <div className="absolute left-6 top-0 hidden h-full w-px bg-deep-200 md:left-0 md:top-6 md:h-px md:w-full" />
-            <div className="grid gap-6 md:grid-cols-4">
-              {processSteps.map((step) => (
-                <div key={step.id} className="relative flex gap-4 md:flex-col md:gap-6">
-                  <div className="relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-deep-900 font-display text-lg font-bold text-primary-400">
-                    {step.step}
-                  </div>
-                  <div>
-                    <h3 className="mb-2 font-display text-lg font-bold text-deep-900">
-                      {step.title}
-                    </h3>
-                    <p className="text-sm text-deep-500">{step.description}</p>
-                  </div>
-                </div>
-              ))}
+      <section className="border-t border-deep-100 bg-mint py-8">
+        <Container className="flex max-w-5xl flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
+          <h2 className="font-display text-2xl font-bold text-deep-900">Meet the people behind Arena</h2>
+          <Link
+            href="/team"
+            className="inline-flex min-h-11 items-center gap-2 rounded-xl border-2 border-deep-900 px-5 font-semibold text-deep-900 transition-colors hover:bg-deep-900 hover:text-white"
+          >
+            Our Team
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+        </Container>
+      </section>
+
+      <section className="bg-white py-8 sm:py-10">
+        <Container className="max-w-5xl">
+          <div className="flex flex-col items-start justify-between gap-5 rounded-2xl bg-deep-900 p-6 sm:flex-row sm:items-center">
+            <div>
+              <h2 className="mb-2 font-display text-xl font-bold text-white">Talk to us about your financing</h2>
+              <div className="flex flex-col gap-1 text-deep-100 sm:flex-row sm:gap-5">
+                {PHONES.map((p) => (
+                  <a key={p.href} href={p.href} className="font-semibold hover:text-primary-400">
+                    {p.label}
+                  </a>
+                ))}
+              </div>
             </div>
+            <Button href="/apply">
+              Apply Now
+              <ArrowRight className="h-5 w-5" />
+            </Button>
           </div>
         </Container>
       </section>
-
-      <TeamSection />
     </>
   );
 }

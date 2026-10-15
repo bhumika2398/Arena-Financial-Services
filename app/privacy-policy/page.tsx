@@ -1,34 +1,13 @@
-﻿import type { Metadata } from "next";
-import { Container } from "@/components/ui/Container";
+import type { Metadata } from "next";
+import { LegalDocument } from "@/components/legal/LegalDocument";
+import { loadLegal } from "@/lib/legal";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "Arena Financial Services' privacy policy.",
+  description:
+    "How Arena Financial Services collects, uses, shares and protects your personal data, and the rights you have over it.",
 };
 
-export default function PrivacyPolicyPage() {
-  return (
-    <>
-      <section className="bg-deep-900 pb-10 pt-24">
-        <Container className="flex flex-col items-center gap-6 text-center">
-          <span className="text-sm font-bold uppercase tracking-widest text-primary-400">
-            Legal
-          </span>
-          <h1 className="max-w-3xl text-balance font-display text-4xl font-bold tracking-tight text-white sm:text-5xl">
-            Privacy Policy
-          </h1>
-        </Container>
-      </section>
-
-      <section className="bg-white py-10">
-        <Container className="mx-auto max-w-3xl">
-          <p className="text-deep-600">
-            This is placeholder content. Arena Financial Services&apos; full
-            privacy policy, describing how we collect, use, and protect your
-            personal information, will be published here.
-          </p>
-        </Container>
-      </section>
-    </>
-  );
+export default function Page() {
+  return <LegalDocument doc={loadLegal("privacy-policy")} other={{ href: "/terms-of-use", label: "Terms of Use" }} />;
 }

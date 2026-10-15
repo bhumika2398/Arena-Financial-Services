@@ -5,7 +5,6 @@ import { ArrowRight, ShieldCheck } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import { HeroAnimation } from "@/components/hero/HeroAnimation";
 import { HeroDashboardCard } from "@/components/hero/HeroDashboardCard";
 import { HeroFloatingShape } from "@/components/hero/HeroFloatingShape";
 import { HeroGlow } from "@/components/hero/HeroGlow";
@@ -19,7 +18,6 @@ export function Hero() {
       <div className="absolute inset-0 bg-deep-900" />
       <HeroLoanScene />
       <HeroGlow />
-      <HeroAnimation showMesh={false} />
       <HeroFloatingShape />
 
       <Container className="relative flex flex-col items-center gap-8 text-center">
@@ -30,7 +28,7 @@ export function Hero() {
         >
           <Badge className="border border-white/15 bg-white/5 text-primary-300 backdrop-blur-sm">
             <ShieldCheck className="h-4 w-4" />
-            Trusted by 38,000+ clients across India
+            Trusted by over 3000 customers
             <ArrowRight className="h-3.5 w-3.5" />
           </Badge>
         </motion.div>

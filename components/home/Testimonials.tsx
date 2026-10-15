@@ -2,7 +2,6 @@
 
 import { motion, useReducedMotion, type PanInfo } from "framer-motion";
 import { useMemo, useState } from "react";
-import { DriftingGlow } from "@/components/animations/DriftingGlow";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { TestimonialFlipCard } from "@/components/testimonials/TestimonialFlipCard";
@@ -41,12 +40,10 @@ export function Testimonials() {
       id="testimonials"
       className="relative scroll-mt-24 overflow-hidden bg-mint py-10"
     >
-      <DriftingGlow />
-      <SecureGrid />
       <Container className="relative z-10 flex max-w-[88rem] flex-col items-center gap-8">
         <SectionHeading
           eyebrow="Client Stories"
-          title="Trusted by Thousands of Clients"
+          title="What Our Customers Say"
           align="center"
         />
 
@@ -117,19 +114,5 @@ export function Testimonials() {
         </div>
       </Container>
     </section>
-  );
-}
-
-/** Very subtle "secure banking" grid texture behind the flip cards. */
-function SecureGrid() {
-  return (
-    <motion.div
-      aria-hidden
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 1.2 }}
-      className="pointer-events-none absolute inset-0 opacity-[0.05] [background-size:42px_42px] [background-image:linear-gradient(to_right,rgba(1,63,74,0.5)_1px,transparent_1px),linear-gradient(to_bottom,rgba(1,63,74,0.5)_1px,transparent_1px)]"
-    />
   );
 }

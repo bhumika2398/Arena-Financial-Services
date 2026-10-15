@@ -16,23 +16,21 @@ export const services: Service[] = [
     description:
       "Quick, collateral-free personal loans to cover life's big and small moments.",
     details: [
-      "Loan amounts from ₹50,000 up to ₹25,00,000",
-      "Flexible tenure from 12 to 60 months",
-      "Minimal documentation, fast digital approval",
-      "Competitive interest rates starting at 10.5% p.a.",
+      "Unsecured: no asset to pledge as security",
+      "Typical tenure of 1-5 years",
+      "Assessed on your CIBIL score",
     ],
   },
   {
     slug: "business-loan",
     icon: "Briefcase",
-    title: "Business Loan",
+    title: "Business Loan (Unsecured)",
     description:
-      "Fuel your growth with working capital and expansion financing tailored to your business.",
+      "Short-term unsecured business loans of 1-5 years, with no collateral, guarantor or hypothecation.",
     details: [
-      "Unsecured and secured options available",
-      "Loan amounts up to ₹2 crore",
-      "Custom repayment schedules",
-      "Support for MSMEs, startups and enterprises",
+      "Unsecured, for 1-5 years",
+      "For self-employed individuals and business owners aged 21 to 65",
+      "Business in continuity for the last 3 years",
     ],
   },
   {
@@ -42,10 +40,9 @@ export const services: Service[] = [
     description:
       "Turn your dream home into reality with affordable, long-tenure home financing.",
     details: [
-      "Loan-to-value up to 90%",
-      "Tenure up to 30 years",
-      "Balance transfer & top-up options",
-      "Assistance with legal and technical checks",
+      "Home purchase loan",
+      "Home improvement loan",
+      "Home construction loan",
     ],
   },
   {
@@ -55,10 +52,9 @@ export const services: Service[] = [
     description:
       "Unlock the value of your residential or commercial property with a secured loan at attractive rates.",
     details: [
-      "Loan amounts based on property valuation",
-      "Tenure up to 15 years",
-      "Lower interest rates than unsecured loans",
-      "Use funds for business, education, or personal needs",
+      "Secured against residential or commercial property",
+      "Long-term repayment with easy monthly EMIs",
+      "Prepay or part-prepay at minimal charges",
     ],
   },
   {
@@ -68,10 +64,9 @@ export const services: Service[] = [
     description:
       "Flexible overdraft facilities against your assets or deposits, so funds are ready whenever you need them.",
     details: [
-      "Interest charged only on the amount utilized",
-      "Overdraft against property, deposits, or securities",
-      "Revolving credit line — withdraw and repay as needed",
-      "Quick renewal and top-up options",
+      "Interest charged on the amount you borrowed",
+      "No prepayment charges, no EMIs",
+      "Secured and unsecured overdrafts",
     ],
   },
   {
@@ -81,10 +76,9 @@ export const services: Service[] = [
     description:
       "Structured, fixed-tenure financing for planned capital expenditure and long-term business needs.",
     details: [
-      "Fixed or floating interest rate options",
-      "Repayment tenure aligned to project cash flows",
-      "Suited for equipment, expansion, and capex financing",
-      "Dedicated relationship manager support",
+      "Specified repayment schedule and set maturity date",
+      "For equipment, real estate or working capital",
+      "Between one and 25 years",
     ],
   },
   {
@@ -94,10 +88,21 @@ export const services: Service[] = [
     description:
       "Fast, short-duration funding to bridge working capital gaps and seize immediate opportunities.",
     details: [
-      "Tenure typically from 3 to 12 months",
-      "Rapid processing and disbursal",
-      "Ideal for bridging cash flow mismatches",
-      "Flexible repayment structures",
+      "Short term credit from leading lenders",
+      "10 months duration",
+      "Built for urgent fund requirements",
+    ],
+  },
+  {
+    slug: "project-funding",
+    icon: "Building2",
+    title: "Project Funding",
+    description:
+      "Long-term financing for infrastructure and industrial projects, based on the strength of the project's cash flows.",
+    details: [
+      "Long-term project finance",
+      "Based on projected cash flows and contractual agreements",
+      "Without recourse to the sponsor company",
     ],
   },
   {
@@ -107,10 +112,9 @@ export const services: Service[] = [
     description:
       "Tailored financing solutions to help small and medium enterprises grow, hire, and scale operations.",
     details: [
-      "Collateral-free options for eligible businesses",
-      "Loan amounts suited to SME working capital cycles",
-      "Support with GST, MSME, and Udyam-linked schemes",
-      "Guidance through documentation and compliance",
+      "Term loans, working capital and bill discounting",
+      "Export credit and letter of credit facilities",
+      "For manufacturing, trading and service units",
     ],
   },
   {
@@ -128,11 +132,15 @@ export const services: Service[] = [
   },
 ];
 
+/** The nine finance services (excludes the EMI Calculator tool). */
+export const loanServices = services.filter((s) => s.slug !== "emi-calculator");
+export const emiTool = services.find((s) => s.slug === "emi-calculator")!;
+
 export const stats: Stat[] = [
-  { label: "Years in Business", value: 15, suffix: "+" },
-  { label: "Loans Disbursed", value: 2400, suffix: "Cr+" },
-  { label: "Happy Clients", value: 38000, suffix: "+" },
-  { label: "Banking Partners", value: 25, suffix: "+" },
+  { prefix: "Over", label: "Happy Customers", value: 3000 },
+  { prefix: "Over", label: "Disbursals", value: 100, suffix: " Cr" },
+  { prefix: "More than", label: "Cities", value: 5 },
+  { prefix: "More than", label: "Banking Partners", value: 25, suffix: "+" },
 ];
 
 // [PLACEHOLDER — replace with real customer testimonials later]

@@ -1,5 +1,6 @@
 import {
   Briefcase,
+  Building2,
   Calculator,
   CalendarClock,
   CreditCard,
@@ -14,6 +15,7 @@ import {
 export const iconMap: Record<string, LucideIcon> = {
   Wallet,
   Briefcase,
+  Building2,
   Home,
   Landmark,
   CreditCard,

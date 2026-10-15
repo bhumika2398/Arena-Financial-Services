@@ -1,66 +1,71 @@
-﻿import type { Metadata } from "next";
-import { Calculator, ArrowRight } from "lucide-react";
+import type { Metadata } from "next";
+import { ArrowRight, ArrowUpRight, Calculator } from "lucide-react";
 import Link from "next/link";
-import { ServiceDetailSection } from "@/components/services/ServiceDetailSection";
 import { Container } from "@/components/ui/Container";
-import { SectionVideoBackground } from "@/components/video/SectionVideoBackground";
-import { services } from "@/lib/data";
+import { emiTool, loanServices } from "@/lib/data";
+import { iconMap } from "@/lib/icons";
 
 export const metadata: Metadata = {
   title: "Business Finance & Solutions",
   description:
-    "Explore Arena Financial Services' full range of financial products — personal, business, home, and SME loans, loan against property, overdraft, term loans, and more.",
+    "Explore Arena Financial Services' range of finance: personal, business, home and SME loans, loan against property, overdraft, term loans, short term finance and project funding.",
 };
-
-// EMI Calculator is an interactive tool with its own dedicated page/route,
-// so it's shown as a CTA banner here rather than a generic detail section.
-const loanServices = services.filter((s) => s.slug !== "emi-calculator");
 
 export default function ServicesPage() {
   return (
     <>
-      <section className="relative overflow-hidden bg-deep-900 pb-10 pt-24">
-        <SectionVideoBackground src="/videos/finance_video_4.mp4" />
-        <Container className="relative z-10 flex flex-col items-center gap-6 text-center">
+      <section className="bg-deep-900 pb-10 pt-24">
+        <Container className="max-w-5xl">
           <span className="text-sm font-bold uppercase tracking-widest text-primary-400">
-            Business Finance & Solutions
+            Business Finance &amp; Solutions
           </span>
-          <h1 className="max-w-3xl text-balance font-display text-4xl font-bold tracking-tight text-white sm:text-5xl">
+          <h1 className="mt-2 max-w-3xl text-balance font-display text-4xl font-bold tracking-tight text-white sm:text-5xl">
             Financial Products for Every Stage of Life
           </h1>
-          <p className="max-w-2xl text-balance text-lg text-deep-200">
-            Jump to any product below for full details, eligibility, and how
-            our advisors can help.
+          <p className="mt-3 max-w-2xl text-lg text-deep-200">
+            Pick a product for full details, eligibility and how we help.
           </p>
         </Container>
       </section>
 
-      {loanServices.map((service, i) => (
-        <ServiceDetailSection
-          key={service.slug}
-          service={service}
-          reverse={i % 2 !== 0}
-        />
-      ))}
+      <section className="bg-white py-8 sm:py-10">
+        <Container className="max-w-5xl">
+          <ul className="divide-y divide-deep-100 border-y border-deep-100">
+            {loanServices.map((s) => {
+              const Icon = iconMap[s.icon];
+              return (
+                <li key={s.slug}>
+                  <Link
+                    href={`/services/${s.slug}`}
+                    className="group grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-4 py-4 transition-colors hover:bg-mint/60 sm:gap-6 sm:px-3"
+                  >
+                    <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-deep-900 text-primary-400">
+                      {Icon ? <Icon className="h-5 w-5" /> : null}
+                    </span>
+                    <span className="min-w-0">
+                      <span className="block font-display text-lg font-bold text-deep-900">{s.title}</span>
+                      <span className="block text-sm text-deep-500">{s.description}</span>
+                    </span>
+                    <ArrowRight className="h-5 w-5 text-deep-300 transition-all group-hover:translate-x-0.5 group-hover:text-primary-600" />
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
 
-      <section className="bg-deep-900 py-8">
-        <Container className="flex flex-col items-center gap-6 text-center">
-          <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-primary-500/15 text-primary-400">
-            <Calculator className="h-7 w-7" />
-          </div>
-          <h2 className="font-display text-2xl font-bold text-white sm:text-3xl">
-            Not Sure What You Can Afford?
-          </h2>
-          <p className="max-w-xl text-balance text-deep-200">
-            Use our EMI Calculator to estimate your monthly repayment before
-            you apply.
-          </p>
           <Link
-            href="/services/emi-calculator"
-            className="inline-flex items-center gap-2 rounded-full bg-primary-500 px-6 py-3 text-sm font-semibold text-deep-900 transition-colors hover:bg-primary-400"
+            href={`/services/${emiTool.slug}`}
+            className="mt-6 flex flex-col items-start gap-3 rounded-xl border border-primary-200 bg-primary-50/60 p-4 transition-colors hover:bg-primary-50 sm:flex-row sm:items-center"
           >
-            Try the EMI Calculator
-            <ArrowRight className="h-4 w-4" />
+            <Calculator className="h-6 w-6 shrink-0 text-primary-700" />
+            <span className="flex-1">
+              <span className="block font-display font-bold text-deep-900">{emiTool.title}</span>
+              <span className="block text-sm text-deep-600">Estimate your monthly repayment before you apply.</span>
+            </span>
+            <span className="inline-flex items-center gap-1 text-sm font-semibold text-primary-700">
+              Open calculator
+              <ArrowUpRight className="h-4 w-4" />
+            </span>
           </Link>
         </Container>
       </section>

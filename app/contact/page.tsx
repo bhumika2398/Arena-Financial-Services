@@ -1,4 +1,5 @@
 ﻿import type { Metadata } from "next";
+import { Suspense } from "react";
 import { MapPin } from "lucide-react";
 import { FormAmbientGlow } from "@/components/animations/FormAmbientGlow";
 import { PartnerMarquee } from "@/components/home/PartnerMarquee";
@@ -34,7 +35,9 @@ export default function ContactPage() {
       <section className="relative overflow-hidden bg-mint py-10">
         <FormAmbientGlow />
         <Container className="relative z-10">
-          <LoanApplicationForm />
+          <Suspense fallback={null}>
+            <LoanApplicationForm />
+          </Suspense>
         </Container>
       </section>
 

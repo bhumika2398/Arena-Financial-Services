@@ -4,10 +4,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
 import { CheckCircle2, Mail, MapPin, Phone } from "lucide-react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import type { ReactNode } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "@/components/ui/Button";
+import { contentBySlug } from "@/lib/service-content";
 
 const companyTypes = [
   "One person company",
@@ -41,6 +43,9 @@ const loanTypes = [
   "Audit and Assurance",
   "Project reports and Cash flow",
   "Private Equity",
+  "Short Term Finance",
+  "Project Funding",
+  "SME Loan",
 ] as const;
 
 const indianMobileRegex = /^(\+91[\-\s]?)?[6-9]\d{9}$/;
@@ -88,6 +93,8 @@ const officeHours = [
 ];
 
 export function LoanApplicationForm() {
+  // /apply?loan=<service-slug> preselects that service's Loan Type.
+  const presetType = contentBySlug[useSearchParams().get("loan") ?? ""]?.loanType;
   const {
     register,
     handleSubmit,
@@ -97,7 +104,9 @@ export function LoanApplicationForm() {
     resolver: zodResolver(loanApplicationSchema),
     defaultValues: {
       companyType: "One person company",
-      loanType: "Business Loan - Secured",
+      loanType: (loanTypes as readonly string[]).includes(presetType ?? "")
+        ? (presetType as (typeof loanTypes)[number])
+        : "Business Loan - Secured",
     },
   });
 

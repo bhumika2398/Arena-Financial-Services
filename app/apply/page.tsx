@@ -1,4 +1,5 @@
 ﻿import type { Metadata } from "next";
+import { Suspense } from "react";
 import { FormAmbientGlow } from "@/components/animations/FormAmbientGlow";
 import { LoanApplicationForm } from "@/components/forms/LoanApplicationForm";
 import { Container } from "@/components/ui/Container";
@@ -30,7 +31,9 @@ export default function ApplyPage() {
       <section className="relative overflow-hidden bg-mint py-10">
         <FormAmbientGlow />
         <Container className="relative z-10">
-          <LoanApplicationForm />
+          <Suspense fallback={null}>
+            <LoanApplicationForm />
+          </Suspense>
         </Container>
       </section>
     </>

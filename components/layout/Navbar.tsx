@@ -21,11 +21,22 @@ const navLinks = [
   { href: "/contact", label: "Contact" },
 ];
 
+type MenuItem = { href: string; label: string };
+const aboutItems: MenuItem[] = [
+  { href: "/about", label: "About Us" },
+  { href: "/team", label: "Our Team" },
+  { href: "/terms-of-use", label: "Terms of Use" },
+  { href: "/privacy-policy", label: "Privacy Policy" },
+];
+const aboutRoutes = aboutItems.map((i) => i.href);
+
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const [servicesOpen, setServicesOpen] = useState(false);
-  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  // Which desktop dropdown is open ("/services" | "/about" | null) and which
+  // mobile accordion is expanded.
+  const [menuOpen, setMenuOpen] = useState<string | null>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState<string | null>(null);
   const closeTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const pathname = usePathname();
   const prefersReducedMotion = useReducedMotion();
@@ -65,13 +76,24 @@ export function Navbar() {
     }, 400);
   }
 
-  function openServicesMenu() {
+  function openMenu(key: string) {
     if (closeTimeout.current) clearTimeout(closeTimeout.current);
-    setServicesOpen(true);
+    setMenuOpen(key);
   }
 
-  function scheduleCloseServicesMenu() {
-    closeTimeout.current = setTimeout(() => setServicesOpen(false), 150);
+  function scheduleCloseMenu() {
+    if (closeTimeout.current) clearTimeout(closeTimeout.current);
+    closeTimeout.current = setTimeout(() => setMenuOpen(null), 150);
+  }
+
+  function menuItemsFor(key: string): MenuItem[] {
+    return key === "/about"
+      ? aboutItems
+      : services.map((s) => ({ href: `/services/${s.slug}`, label: s.title }));
+  }
+
+  function isMenuActive(key: string) {
+    return key === "/about" ? aboutRoutes.includes(pathname) : pathname.startsWith("/services");
   }
 
   useEffect(() => {
@@ -91,31 +113,40 @@ export function Navbar() {
       )}
     >
       <Container className="flex h-20 items-center justify-between">
-        <Link href="/" className="flex items-center rounded-xl bg-white/95 px-2.5 py-1.5 shadow-sm">
+        <Link href="/" className="flex items-center" aria-label="Arena Financial Services — home">
           <Image
-            src="/images/logo.png"
+            src={scrolled ? "/images/logo.png" : "/images/logo-light.png"}
             alt="Arena Financial Services"
-            width={230}
-            height={64}
+            width={900}
+            height={467}
             priority
-            className="h-8 w-auto sm:h-9 md:h-10"
+            className="h-14 w-auto sm:h-[4.25rem]"
           />
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">
           {navLinks.map((link) =>
-            link.href === "/services" ? (
+            link.href === "/services" || link.href === "/about" ? (
               <div
                 key={link.href}
                 className="relative"
-                onMouseEnter={openServicesMenu}
-                onMouseLeave={scheduleCloseServicesMenu}
+                onMouseEnter={() => openMenu(link.href)}
+                onMouseLeave={scheduleCloseMenu}
+                onFocus={() => openMenu(link.href)}
+                onBlur={(e) => {
+                  if (!e.currentTarget.contains(e.relatedTarget as Node | null)) scheduleCloseMenu();
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === "Escape") setMenuOpen(null);
+                }}
               >
                 <Link
                   href={link.href}
+                  aria-haspopup="menu"
+                  aria-expanded={menuOpen === link.href}
                   className={cn(
                     "flex items-center gap-1 text-sm font-semibold uppercase tracking-wide transition-colors hover:text-primary-600",
-                    pathname.startsWith("/services")
+                    isMenuActive(link.href)
                       ? "text-primary-600"
                       : scrolled
                         ? "text-deep-700"
@@ -126,13 +157,13 @@ export function Navbar() {
                   <ChevronDown
                     className={cn(
                       "h-3.5 w-3.5 transition-transform",
-                      servicesOpen && "rotate-180",
+                      menuOpen === link.href && "rotate-180",
                     )}
                   />
                 </Link>
 
                 <AnimatePresence>
-                  {servicesOpen ? (
+                  {menuOpen === link.href ? (
                     <motion.div
                       initial={{ opacity: 0, y: 8 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -140,15 +171,19 @@ export function Navbar() {
                       transition={{ duration: 0.15 }}
                       className="absolute left-1/2 top-full z-50 mt-3 w-72 -translate-x-1/2 rounded-2xl border border-white/40 bg-white/80 p-3 shadow-xl backdrop-blur-md"
                     >
-                      <ul className="grid grid-cols-1 gap-1">
-                        {services.map((service) => (
-                          <li key={service.slug}>
+                      <ul className="grid grid-cols-1 gap-1" role="menu">
+                        {menuItemsFor(link.href).map((item) => (
+                          <li key={item.href} role="none">
                             <Link
-                              href={`/services/${service.slug}`}
-                              onClick={() => setServicesOpen(false)}
-                              className="block rounded-lg px-3 py-2 text-xs font-bold uppercase tracking-widest text-deep-700 transition-colors hover:bg-deep-50 hover:text-primary-600"
+                              href={item.href}
+                              role="menuitem"
+                              onClick={() => setMenuOpen(null)}
+                              className={cn(
+                                "block rounded-lg px-3 py-2 text-xs font-bold uppercase tracking-widest transition-colors hover:bg-deep-50 hover:text-primary-600",
+                                pathname === item.href ? "text-primary-600" : "text-deep-700",
+                              )}
                             >
-                              {service.title}
+                              {item.label}
                             </Link>
                           </li>
                         ))}
@@ -235,23 +270,36 @@ export function Navbar() {
               </div>
               <nav className="flex flex-col gap-6">
                 {navLinks.map((link) =>
-                  link.href === "/services" ? (
+                  link.href === "/services" || link.href === "/about" ? (
                     <div key={link.href} className="flex flex-col gap-3">
-                      <button
-                        type="button"
-                        onClick={() => setMobileServicesOpen((v) => !v)}
-                        className="flex min-h-11 items-center justify-between text-base font-semibold text-deep-700 hover:text-primary-600"
-                      >
-                        {link.label}
-                        <ChevronDown
+                      <div className="flex min-h-11 items-center justify-between">
+                        <Link
+                          href={link.href}
+                          onClick={() => setOpen(false)}
                           className={cn(
-                            "h-4 w-4 transition-transform",
-                            mobileServicesOpen && "rotate-180",
+                            "text-base font-semibold hover:text-primary-600",
+                            isMenuActive(link.href) ? "text-primary-600" : "text-deep-700",
                           )}
-                        />
-                      </button>
+                        >
+                          {link.label}
+                        </Link>
+                        <button
+                          type="button"
+                          aria-label={`Toggle ${link.label} menu`}
+                          aria-expanded={mobileMenuOpen === link.href}
+                          onClick={() => setMobileMenuOpen((v) => (v === link.href ? null : link.href))}
+                          className="flex h-11 w-11 items-center justify-center text-deep-700"
+                        >
+                          <ChevronDown
+                            className={cn(
+                              "h-4 w-4 transition-transform",
+                              mobileMenuOpen === link.href && "rotate-180",
+                            )}
+                          />
+                        </button>
+                      </div>
                       <AnimatePresence initial={false}>
-                        {mobileServicesOpen ? (
+                        {mobileMenuOpen === link.href ? (
                           <motion.ul
                             initial={{ height: 0, opacity: 0 }}
                             animate={{ height: "auto", opacity: 1 }}
@@ -259,14 +307,17 @@ export function Navbar() {
                             transition={{ duration: 0.2 }}
                             className="flex flex-col gap-3 overflow-hidden pl-4"
                           >
-                            {services.map((service) => (
-                              <li key={service.slug}>
+                            {menuItemsFor(link.href).map((item) => (
+                              <li key={item.href}>
                                 <Link
-                                  href={`/services/${service.slug}`}
+                                  href={item.href}
                                   onClick={() => setOpen(false)}
-                                  className="text-sm font-bold uppercase tracking-widest text-deep-500 hover:text-primary-600"
+                                  className={cn(
+                                    "text-sm font-bold uppercase tracking-widest hover:text-primary-600",
+                                    pathname === item.href ? "text-primary-600" : "text-deep-500",
+                                  )}
                                 >
-                                  {service.title}
+                                  {item.label}
                                 </Link>
                               </li>
                             ))}

@@ -5,10 +5,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { type FormEvent, useState } from "react";
 import { Container } from "@/components/ui/Container";
-import { services } from "@/lib/data";
+import { loanServices } from "@/lib/data";
 
 const quickLinks = [
   { href: "/about", label: "About Us" },
+  { href: "/team", label: "Our Team" },
   { href: "/services", label: "Finance & Solutions" },
   { href: "/testimonials", label: "Testimonials" },
   { href: "/faq", label: "FAQ" },
@@ -52,15 +53,13 @@ export function Footer() {
       />
       <Container className="relative z-10 grid gap-6 py-8 md:grid-cols-2 lg:grid-cols-4">
         <div className="flex flex-col gap-4">
-          <span className="inline-flex w-fit items-center rounded-xl bg-white/95 px-2.5 py-1.5 shadow-sm">
-            <Image
-              src="/images/logo.png"
-              alt="Arena Financial Services"
-              width={230}
-              height={64}
-              className="h-9 w-auto"
-            />
-          </span>
+          <Image
+            src="/images/logo-light.png"
+            alt="Arena Financial Services"
+            width={900}
+            height={467}
+            className="h-16 w-auto self-start"
+          />
           <p className="text-sm text-deep-300">
             Trusted financial guidance for loans, insurance and investments —
             personal, transparent, and built around your goals.
@@ -99,7 +98,7 @@ export function Footer() {
             Business Finance & Solutions
           </h3>
           <ul className="flex flex-col gap-3 text-sm">
-            {services.slice(0, 6).map((service) => (
+            {loanServices.map((service) => (
               <li key={service.slug}>
                 <Link
                   href={`/services/${service.slug}`}
@@ -169,6 +168,21 @@ export function Footer() {
       <div className="border-t border-deep-800 py-4">
         <Container className="flex flex-col items-center justify-between gap-2 text-center text-sm text-deep-300 sm:flex-row sm:text-left sm:text-base">
           <span>© {new Date().getFullYear()} Arena Financial Services. All rights reserved.</span>
+          <span className="flex items-center gap-4">
+            <Link href="/terms-of-use" className="hover:text-primary-400">
+              Terms of Use
+            </Link>
+            <Link href="/privacy-policy" className="hover:text-primary-400">
+              Privacy Policy
+            </Link>
+            <button
+              type="button"
+              onClick={() => window.dispatchEvent(new Event("arena:consent-open"))}
+              className="hover:text-primary-400"
+            >
+              Cookie settings
+            </button>
+          </span>
           <span>
             Designed &amp; Developed by{" "}
             <a

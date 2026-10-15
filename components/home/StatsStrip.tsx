@@ -2,7 +2,6 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { StatsGlow } from "@/components/animations/StatsGlow";
 import { Container } from "@/components/ui/Container";
 import { stats } from "@/lib/data";
 import { useCountUp } from "@/lib/useCountUp";
@@ -11,21 +10,24 @@ function StatItem({
   value,
   label,
   suffix,
+  prefix,
   active,
 }: {
   value: number;
   label: string;
   suffix?: string;
+  prefix?: string;
   active: boolean;
 }) {
   const count = useCountUp(value, active);
   return (
-    <div className="flex flex-col items-center gap-2 text-center">
-      <span className="font-display text-6xl font-bold tracking-tighter text-white sm:text-7xl">
-        {count.toLocaleString()}
+    <div className="flex flex-col items-start gap-1">
+      <span className="text-xs font-semibold uppercase tracking-wide text-deep-300">{prefix}</span>
+      <span className="font-display text-4xl font-bold tabular-nums text-white sm:text-5xl">
+        {count.toLocaleString("en-IN", { useGrouping: false })}
         {suffix}
       </span>
-      <span className="text-sm font-medium text-deep-200">{label}</span>
+      <span className="text-xs font-bold uppercase tracking-widest text-primary-400">{label}</span>
     </div>
   );
 }
@@ -37,19 +39,9 @@ export function StatsStrip() {
   return (
     <section
       ref={ref}
-      className="relative overflow-hidden border-y-4 border-primary-500/70 bg-deep-alt1 py-8"
+      className="bg-deep-900 py-8"
     >
-      <StatsGlow />
-      {/* Architectural grid-line texture, same repeating-linear-gradient technique as HeroGlow */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.06]"
-        style={{
-          backgroundImage:
-            "repeating-linear-gradient(0deg, rgba(255,255,255,0.5) 0px, rgba(255,255,255,0.5) 1px, transparent 1px, transparent 64px), repeating-linear-gradient(90deg, rgba(255,255,255,0.5) 0px, rgba(255,255,255,0.5) 1px, transparent 1px, transparent 64px)",
-        }}
-      />
-      <Container className="relative z-10 grid grid-cols-2 gap-8 lg:grid-cols-4">
+      <Container className="grid grid-cols-2 gap-x-6 gap-y-6 lg:grid-cols-4 lg:divide-x lg:divide-white/10 [&>*]:lg:pl-6 [&>*:first-child]:lg:pl-0">
         {stats.map((stat, i) => (
           <motion.div
             key={stat.label}
@@ -61,6 +53,7 @@ export function StatsStrip() {
               value={stat.value}
               label={stat.label}
               suffix={stat.suffix}
+              prefix={stat.prefix}
               active={inView}
             />
           </motion.div>

@@ -36,7 +36,7 @@ export function ServiceDetailSection({
             {service.title}
           </h2>
           <p className="mb-6 text-lg text-deep-500">{service.description}</p>
-          <Button href="/contact">Enquire Now</Button>
+          <Button href={`/services/${service.slug}`}>View details</Button>
         </div>
 
         <ul className={cn("flex flex-col gap-4", reverse && "lg:order-1")}>

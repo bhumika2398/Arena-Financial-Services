@@ -7,7 +7,6 @@ import { ProcessTimeline } from "@/components/home/ProcessTimeline";
 import { ServicesGrid } from "@/components/home/ServicesGrid";
 import { StatsStrip } from "@/components/home/StatsStrip";
 import { Testimonials } from "@/components/home/Testimonials";
-import { WhyChooseUs } from "@/components/home/WhyChooseUs";
 
 export default function Home() {
   return (
@@ -16,7 +15,6 @@ export default function Home() {
       <Hero />
       <StatsStrip />
       <ServicesGrid />
-      <WhyChooseUs />
       <ProcessTimeline />
       
       <Testimonials />

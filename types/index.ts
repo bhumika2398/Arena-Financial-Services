@@ -10,6 +10,8 @@ export interface Stat {
   label: string;
   value: number;
   suffix?: string;
+  /** Small qualifier shown above the number, e.g. "Over". */
+  prefix?: string;
 }
 
 export interface Testimonial {
