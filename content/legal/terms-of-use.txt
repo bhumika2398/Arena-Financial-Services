@@ -26,12 +26,12 @@ b.   In the case of registered users, the consent and terms that you have entere
 
 1.3        By accessing or using our Platform, you acknowledge and agree to be bound by these Terms. If you do not agree to these Terms, you must not access or use our Platform.
 
-1.4      Use of the Platform is available only to persons who can enter legally binding contracts under the Indian Contract Act, 1872. Persons who are “incompetent to contract” within the meaning of the Indian Contract Act, 1872 including minors, undischarged insolvents and persons of unsound mind are not eligible to use the Website. Any person under the age of 21 shall not register as a user on the Platform and shall not transact on or use the Platform. Tiwari Financial Services reserves the right to terminate any person’s membership and/or refuse to provide such person with access to the Platform if it is discovered that such person is not eligible to use the Platform.
+1.4      Use of the Platform is available only to persons who can enter legally binding contracts under the Indian Contract Act, 1872. Persons who are “incompetent to contract” within the meaning of the Indian Contract Act, 1872 including minors, undischarged insolvents and persons of unsound mind are not eligible to use the Website. Any person under the age of 21 shall not register as a user on the Platform and shall not transact on or use the Platform. Arena Financial Services reserves the right to terminate any person’s membership and/or refuse to provide such person with access to the Platform if it is discovered that such person is not eligible to use the Platform.
 
 1.6       In the event you register as a user on our Platform on behalf of an incorporated entity, it is presumed that you have been authorised by the entity and your use of the Platform shall bind the entity with respect to these Terms.
 
 2.                  CORPORATE INFORMATION
-(1) Our Platform is operated by  Tiwari Financial Services located at #103,104 Ground Floor Oxford chambers Rustam Bhag Bengaluru 560 017 (‘Tiwari Financial Services, ‘we’ or ‘us’).
+(1) Our Platform is operated by  Arena Financial Services located at #103-104, Ground Floor, Oxford Chambers, Rustum Bagh, Old Airport Road, Kodihalli, Bengaluru 560017 (‘Arena Financial Services’, ‘we’ or ‘us’).
 
  
 
@@ -137,7 +137,7 @@ iv.               any equipment or network or software owned or used by any thir
 
             10.5       We reserve the right to withdraw linking permission without notice.
 
-10.6        If you wish to make any use of content on our Platform other than that set out above, please contact support@tiwarifinserv.com
+10.6        If you wish to make any use of content on our Platform other than that set out above, please contact ceo@arenafinance.in
 
 11.               THIRD PARTY LINKS AND RESOURCES IN OUR PLATFORM
               Where our Platform contains links to other websites and resources provided by third  parties, these links are provided for your information only and we assume no responsibility for the content of such websites or resources and we will not be liable for any loss or damage that may arise from your use of them.
@@ -178,9 +178,9 @@ iv.               any equipment or network or software owned or used by any thir
 
      e.       any indirect or consequential loss or damage.
 
-13.6                                 13.6       In no event shall Tiwari financial services., its directors, employees or agents, be liable for any special, incidental, indirect or consequential damages whatsoever resulting from any (i) errors, mistakes, or inaccuracies of content; (ii) personal injury or property damage, of any nature whatsoever, resulting from the borrower’s access to and use of the website;(iii) any unauthorized access to or use of the secure servers and/or any and all personal and/or business and/or financial information stored therein; (iv) any interruption or cessation of  transmission to or from the website; (v) any bugs, viruses, trojan horses, or the like, which may be transmitted to or through the website by any third party; and/or (vi) any errors or omissions in any content or for any loss or damage of any kind incurred as a result of the use of any content posted, emailed, transmitted, or otherwise made available via the website, whether based on warranty, contract, tort, or any other legal theory, and whether or not Tiwari Capital is advised of the possibility of such damages.
+13.6       In no event shall Arena Financial Services, its directors, employees or agents, be liable for any special, incidental, indirect or consequential damages whatsoever resulting from any (i) errors, mistakes, or inaccuracies of content; (ii) personal injury or property damage, of any nature whatsoever, resulting from the borrower’s access to and use of the website;(iii) any unauthorized access to or use of the secure servers and/or any and all personal and/or business and/or financial information stored therein; (iv) any interruption or cessation of  transmission to or from the website; (v) any bugs, viruses, trojan horses, or the like, which may be transmitted to or through the website by any third party; and/or (vi) any errors or omissions in any content or for any loss or damage of any kind incurred as a result of the use of any content posted, emailed, transmitted, or otherwise made available via the website, whether based on warranty, contract, tort, or any other legal theory, and whether or not Arena Financial Services is advised of the possibility of such damages.
 
-            13.7      Subject to the above and notwithstanding anything to the contrary contained in these Terms, the maximum aggregate liability (whether in contract, tort (including negligence) or equity) of Tiwari Capital to any user, regardless of the form of claim, shall be limited to the aggregate of fees, if any, paid by the user to Tiwari financial services.. The  foregoing limitations of liability will apply notwithstanding the failure of essential  purpose of any limited remedy herein. This limitation of liability clause shall prevail over any conflicting or inconsistent provision contained in any of the documents /content comprising this Terms. It is up to you to take precautions to ensure that whatever you select for your use is free of such items as viruses, worms, malware,Trojan horses and other items of a destructive nature.
+            13.7      Subject to the above and notwithstanding anything to the contrary contained in these Terms, the maximum aggregate liability (whether in contract, tort (including negligence) or equity) of Arena Financial Services to any user, regardless of the form of claim, shall be limited to the aggregate of fees, if any, paid by the user to Arena Financial Services. The  foregoing limitations of liability will apply notwithstanding the failure of essential  purpose of any limited remedy herein. This limitation of liability clause shall prevail over any conflicting or inconsistent provision contained in any of the documents /content comprising this Terms. It is up to you to take precautions to ensure that whatever you select for your use is free of such items as viruses, worms, malware,Trojan horses and other items of a destructive nature.
 
 14.               COOKIES
 14.1        We aim to provide you with the information that is most relevant to you. In order to do this, our Platform deploys a "cookie", which is a technology that allows the Platform to store tokens of information (an 'identifier') in your browser, used only by this Platform.
@@ -235,14 +235,14 @@ Third party cookie
  
 
 16.               GRIEVANCE REDRESSAL MECHANISM
-             In accordance with the Information Technology Act, 2000 and Rules made thereunde, the name and contact details of the Grievance Officer are provided below:
+             In accordance with the Information Technology Act, 2000 and Rules made thereunder, the name and contact details of the Grievance Officer are provided below:
 
  
 Name: Sanjay Tiwari
-Address #103,104 Ground Floor Oxford chambers Rustam Bhag Bengaluru 560 017
+Address: #103-104, Ground Floor, Oxford Chambers, Rustum Bagh, Old Airport Road, Kodihalli, Bengaluru 560017
 
-E-mail: ceo@tiwarifinserv.com
+E-mail: ceo@arenafinance.in
 
 17.               CONTACT US
-To contact us with any questions or concerns about this policy, please email support@tiwarifinserv.com.
+To contact us with any questions or concerns about this policy, please email ceo@arenafinance.in.
 

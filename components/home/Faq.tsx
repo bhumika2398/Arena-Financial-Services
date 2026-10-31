@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 import { Container } from "@/components/ui/Container";
@@ -10,44 +10,26 @@ import { cn } from "@/lib/utils";
 
 export function Faq() {
   const [openId, setOpenId] = useState<string | null>(faqItems[0]?.id ?? null);
-  const prefersReducedMotion = useReducedMotion();
 
   return (
     <section
       id="faq"
-      className="relative scroll-mt-24 overflow-hidden bg-mint py-10"
+      className="scroll-mt-24 bg-mint py-16"
     >
-      {/* Subtle animated grain texture for a bit of tactile depth */}
-      <svg className="pointer-events-none absolute inset-0 h-full w-full opacity-[0.035]" aria-hidden>
-        <filter id="faqGrain">
-          <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves={2} stitchTiles="stitch" />
-        </filter>
-        <rect
-          width="100%"
-          height="100%"
-          filter="url(#faqGrain)"
-          className={prefersReducedMotion ? "" : "animate-grain"}
-        />
-      </svg>
-      <Container className="relative z-10 flex flex-col gap-8">
+      <Container className="flex max-w-3xl flex-col gap-8">
         <SectionHeading
-          eyebrow="Frequently Asked Questions"
-          title="Have Questions? We Have Answers"
-          subtitle="Everything you need to know before getting started with Arena Finserv."
+          eyebrow="FAQ"
+          title="Frequently asked questions"
+          align="center"
         />
 
-        <div className="mx-auto flex w-full max-w-3xl flex-col gap-3">
+        <div className="flex w-full flex-col gap-3">
           {faqItems.map((item) => {
             const isOpen = openId === item.id;
             return (
               <div
                 key={item.id}
-                className={cn(
-                  "overflow-hidden rounded-2xl border shadow-sm transition-all duration-300 hover:shadow-md",
-                  isOpen
-                    ? "border-white/40 bg-white/50 backdrop-blur-sm sm:backdrop-blur-md"
-                    : "border-deep-100 bg-white hover:border-white/40 hover:bg-white/50 hover:backdrop-blur-sm",
-                )}
+                className="brutal-sm overflow-hidden rounded-[14px] bg-white"
               >
                 <button
                   type="button"

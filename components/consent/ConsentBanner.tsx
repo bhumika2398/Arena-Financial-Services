@@ -76,7 +76,7 @@ export function ConsentBanner() {
           animate={{ opacity: 1, y: 0 }}
           exit={reduced ? { opacity: 0 } : { opacity: 0, y: 24 }}
           transition={{ duration: 0.3, ease: "easeOut" }}
-          className="fixed inset-x-0 bottom-0 z-[60] border-t border-deep-200 bg-white p-4 shadow-[0_-8px_24px_-12px_rgba(0,0,0,0.25)] print:hidden sm:inset-x-auto sm:bottom-4 sm:left-4 sm:w-[30rem] sm:max-w-[calc(100vw-2rem)] sm:rounded-2xl sm:border sm:shadow-xl"
+          className="fixed inset-x-0 bottom-0 z-[60] border-t border-deep-200 bg-white p-4 shadow-sm print:hidden sm:inset-x-auto sm:bottom-4 sm:left-4 sm:w-[30rem] sm:max-w-[calc(100vw-2rem)] sm:rounded-[10px] sm:border sm:shadow-sm"
         >
           <p className="text-sm leading-relaxed text-deep-700">
             We use cookies to run this site and to understand how it is used. By continuing you

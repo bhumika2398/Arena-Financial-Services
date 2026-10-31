@@ -1,64 +1,48 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { Suspense } from "react";
-import { MapPin } from "lucide-react";
-import { FormAmbientGlow } from "@/components/animations/FormAmbientGlow";
-import { PartnerMarquee } from "@/components/home/PartnerMarquee";
-import { LoanApplicationForm } from "@/components/forms/LoanApplicationForm";
+import { EnquiryForm } from "@/components/forms/EnquiryForm";
 import { Container } from "@/components/ui/Container";
-import { SectionVideoBackground } from "@/components/video/SectionVideoBackground";
+import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Contact Us",
+  title: "Contact",
   description:
-    "Get in touch with the Arena Finserv team for loans, insurance, or investment advisory. Reach us by phone, email, or the contact form.",
+    "Share your funding requirement and an Arena Financial Services advisor will call you back within one working day.",
 };
+
+const mapSrc = `https://maps.google.com/maps?q=${encodeURIComponent(SITE.address.full)}&z=15&output=embed`;
 
 export default function ContactPage() {
   return (
     <>
-      <section className="relative overflow-hidden bg-deep-900 pb-10 pt-24">
-        <SectionVideoBackground src="/videos/finance_video_2.mp4" />
-        <Container className="relative z-10 flex flex-col items-center gap-6 text-center">
-          <span className="text-sm font-bold uppercase tracking-widest text-primary-400">
-            Get in Touch
-          </span>
-          <h1 className="max-w-3xl text-balance font-display text-4xl font-bold tracking-tight text-white sm:text-5xl">
-            We&apos;re Here to Help
+      <section className="bg-deep-900 pb-10 pt-24">
+        <Container className="max-w-6xl">
+          <span className="text-sm font-bold uppercase tracking-widest text-primary-300">Contact</span>
+          <h1 className="mt-2 max-w-3xl text-balance font-display text-4xl font-bold tracking-tight text-white sm:text-5xl">
+            Let&apos;s talk about your funding needs
           </h1>
-          <p className="max-w-2xl text-balance text-lg text-deep-200">
-            Reach out to our team for a free consultation on loans, insurance,
-            or investment planning.
+          <p className="mt-3 max-w-2xl text-lg text-deep-100">
+            Share your requirement and an Arena advisor will call you back within one working day.
           </p>
         </Container>
       </section>
 
-      <section className="relative overflow-hidden bg-mint py-10">
-        <FormAmbientGlow />
-        <Container className="relative z-10">
+      <section className="bg-mint py-8 sm:py-10">
+        <Container className="max-w-6xl">
           <Suspense fallback={null}>
-            <LoanApplicationForm />
+            <EnquiryForm />
           </Suspense>
         </Container>
       </section>
 
       <section className="bg-white py-8">
-        <Container className="flex flex-col gap-6">
-          <div className="flex items-start gap-4 rounded-2xl bg-mint p-5 shadow-sm">
-            <MapPin className="mt-1 h-5 w-5 shrink-0 text-primary-500" />
-            <div>
-              <p className="font-display font-bold text-deep-900">Office Address</p>
-              <p className="text-sm text-deep-500">
-                #103,104 Ground Floor, Oxford Chambers, Rustam Bhag, Bengaluru
-                560017
-              </p>
-            </div>
-          </div>
-          <div className="overflow-hidden rounded-2xl shadow-sm">
+        <Container className="max-w-6xl">
+          <div className="overflow-hidden rounded-[10px] border border-deep-100">
             <iframe
-              title="Office location map"
-              src="https://maps.google.com/maps?q=Oxford+Chambers,+Rustam+Bhag,+Bengaluru+560017&t=&z=15&ie=UTF8&iwloc=&output=embed"
+              title="Arena Financial Services office on Google Maps"
+              src={mapSrc}
               width="100%"
-              height="320"
+              height="360"
               style={{ border: 0 }}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
@@ -67,7 +51,15 @@ export default function ContactPage() {
         </Container>
       </section>
 
-      <PartnerMarquee />
+      <section className="border-t border-deep-100 bg-mint py-8">
+        <Container className="max-w-6xl">
+          <h2 className="font-display text-2xl font-bold text-deep-900">Our Business Partner</h2>
+          <p className="mt-2 max-w-[65ch] text-deep-600">
+            Arena Financial Services works in association with Tiwari Financial Services, Bengaluru, which acts
+            as our business partner.
+          </p>
+        </Container>
+      </section>
     </>
   );
 }

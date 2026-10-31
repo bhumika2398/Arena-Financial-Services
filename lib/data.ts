@@ -1,311 +1,149 @@
-import type {
-  FaqItem,
-  Partner,
-  ProcessStep,
-  Service,
-  Stat,
-  TeamMember,
-  Testimonial,
-} from "@/types";
+import type { FaqItem, Person, ProcessStep, Service, Testimonial } from "@/types";
 
 export const services: Service[] = [
   {
-    slug: "personal-loan",
-    icon: "Wallet",
-    title: "Personal Loan",
-    description:
-      "Quick, collateral-free personal loans to cover life's big and small moments.",
-    details: [
-      "Unsecured: no asset to pledge as security",
-      "Typical tenure of 1-5 years",
-      "Assessed on your CIBIL score",
-    ],
-  },
-  {
     slug: "business-loan",
-    icon: "Briefcase",
     title: "Business Loan (Unsecured)",
-    description:
-      "Short-term unsecured business loans of 1-5 years, with no collateral, guarantor or hypothecation.",
-    details: [
-      "Unsecured, for 1-5 years",
-      "For self-employed individuals and business owners aged 21 to 65",
-      "Business in continuity for the last 3 years",
-    ],
+    description: "Collateral-free funding for 1 to 5 years.",
+    group: "business",
   },
   {
-    slug: "home-loan",
-    icon: "Home",
-    title: "Home Loan",
-    description:
-      "Turn your dream home into reality with affordable, long-tenure home financing.",
-    details: [
-      "Home purchase loan",
-      "Home improvement loan",
-      "Home construction loan",
-    ],
-  },
-  {
-    slug: "loan-against-property",
-    icon: "Landmark",
-    title: "Loan Against Property",
-    description:
-      "Unlock the value of your residential or commercial property with a secured loan at attractive rates.",
-    details: [
-      "Secured against residential or commercial property",
-      "Long-term repayment with easy monthly EMIs",
-      "Prepay or part-prepay at minimal charges",
-    ],
-  },
-  {
-    slug: "overdraft",
-    icon: "CreditCard",
-    title: "Overdraft",
-    description:
-      "Flexible overdraft facilities against your assets or deposits, so funds are ready whenever you need them.",
-    details: [
-      "Interest charged on the amount you borrowed",
-      "No prepayment charges, no EMIs",
-      "Secured and unsecured overdrafts",
-    ],
-  },
-  {
-    slug: "term-loan",
-    icon: "CalendarClock",
-    title: "Term Loan",
-    description:
-      "Structured, fixed-tenure financing for planned capital expenditure and long-term business needs.",
-    details: [
-      "Specified repayment schedule and set maturity date",
-      "For equipment, real estate or working capital",
-      "Between one and 25 years",
-    ],
+    slug: "working-capital",
+    title: "Working Capital (OD / CC)",
+    description: "Flexible limits to manage day-to-day cash flow.",
+    group: "business",
   },
   {
     slug: "short-term-finance",
-    icon: "Zap",
     title: "Short Term Finance",
-    description:
-      "Fast, short-duration funding to bridge working capital gaps and seize immediate opportunities.",
-    details: [
-      "Short term credit from leading lenders",
-      "10 months duration",
-      "Built for urgent fund requirements",
-    ],
+    description: "Quick, short-duration funding to bridge working capital gaps.",
+    group: "business",
+  },
+  {
+    slug: "loan-against-property",
+    title: "Loan Against Property",
+    description: "Secured funding against residential or commercial property.",
+    group: "business",
+  },
+  {
+    slug: "term-loan-machinery-finance",
+    title: "Term Loan & Machinery Finance",
+    description: "Fixed-tenure funding for expansion and equipment.",
+    group: "business",
   },
   {
     slug: "project-funding",
-    icon: "Building2",
     title: "Project Funding",
-    description:
-      "Long-term financing for infrastructure and industrial projects, based on the strength of the project's cash flows.",
-    details: [
-      "Long-term project finance",
-      "Based on projected cash flows and contractual agreements",
-      "Without recourse to the sponsor company",
-    ],
+    description: "Long-term finance for new and expansion projects.",
+    group: "business",
   },
   {
-    slug: "sme-loan",
-    icon: "Factory",
-    title: "SME Loan",
-    description:
-      "Tailored financing solutions to help small and medium enterprises grow, hire, and scale operations.",
-    details: [
-      "Term loans, working capital and bill discounting",
-      "Export credit and letter of credit facilities",
-      "For manufacturing, trading and service units",
-    ],
+    slug: "cgtmse-loans",
+    title: "CGTMSE Collateral-free Loans",
+    description: "Government-backed credit guarantee loans for MSMEs.",
+    group: "business",
   },
   {
-    slug: "emi-calculator",
-    icon: "Calculator",
-    title: "EMI Calculator",
-    description:
-      "Instantly estimate your monthly EMI, total interest, and total repayment for any loan amount and tenure.",
-    details: [
-      "Works for personal, home, business, and SME loans",
-      "Adjust loan amount, interest rate, and tenure in real time",
-      "See a visual breakdown of principal vs. interest",
-      "Use the estimate to plan your application with our advisors",
-    ],
-  },
-];
-
-/** The nine finance services (excludes the EMI Calculator tool). */
-export const loanServices = services.filter((s) => s.slug !== "emi-calculator");
-export const emiTool = services.find((s) => s.slug === "emi-calculator")!;
-
-export const stats: Stat[] = [
-  { prefix: "Over", label: "Happy Customers", value: 3000 },
-  { prefix: "Over", label: "Disbursals", value: 100, suffix: " Cr" },
-  { prefix: "More than", label: "Cities", value: 5 },
-  { prefix: "More than", label: "Banking Partners", value: 25, suffix: "+" },
-];
-
-// [PLACEHOLDER — replace with real customer testimonials later]
-export const testimonials: Testimonial[] = [
-  {
-    id: "t1",
-    name: "Ananya Sharma",
-    role: "Small Business Owner",
-    quote:
-      "Arena Finserv made getting my business loan effortless. The team guided me through every step and I had funds disbursed within a week.",
-    rating: 5,
-    loanType: "Business Loan Customer",
+    slug: "bill-invoice-discounting",
+    title: "Bill / Invoice Discounting",
+    description: "Turn unpaid invoices into working capital.",
+    group: "business",
   },
   {
-    id: "t2",
-    name: "Rohan Mehta",
-    role: "Homeowner",
-    quote:
-      "Their home loan advisory saved me lakhs in interest by comparing lenders I hadn't even considered. Truly professional service.",
-    rating: 5,
-    loanType: "Home Loan Customer",
+    slug: "bank-guarantee-letter-of-credit",
+    title: "Bank Guarantee & Letter of Credit",
+    description: "Support for tenders, contracts and trade.",
+    group: "business",
   },
   {
-    id: "t3",
-    name: "Priya Nair",
-    role: "IT Professional",
-    quote:
-      "I started my SIP journey with their investment team and the portfolio has consistently outperformed my expectations.",
-    rating: 4,
-    loanType: "Personal Loan Customer",
+    slug: "home-loan",
+    title: "Home Loan",
+    description: "Long-tenure finance to buy or build your home.",
+    group: "also",
   },
   {
-    id: "t4",
-    name: "Vikram Desai",
-    role: "Retail Entrepreneur",
-    quote:
-      "The insurance plan they recommended for my family gives me real peace of mind. Claims support was seamless too.",
-    rating: 5,
-    loanType: "SME Loan Customer",
-  },
-  {
-    id: "t5",
-    name: "Sneha Iyer",
-    role: "Freelance Consultant",
-    quote:
-      "Transparent process, no hidden charges, and a team that actually explains the fine print. Highly recommend.",
-    rating: 5,
-    loanType: "Personal Loan Customer",
+    slug: "personal-loan",
+    title: "Personal Loan",
+    description: "Collateral-free funds for personal needs.",
+    group: "also",
   },
 ];
 
-export const partners: Partner[] = [
-  { id: "p1", name: "Yes Bank", logo: "/images/partners/yes-bank.png" },
-  { id: "p2", name: "Standard Chartered", logo: "/images/partners/standard-chartered.png" },
-  { id: "p3", name: "Deutsche Bank", logo: "/images/partners/deutsche-bank.png" },
-  { id: "p4", name: "Capital Float", logo: "/images/partners/capital-float.png" },
-  { id: "p5", name: "Arohan", logo: "/images/partners/arohan.jpg" },
-  { id: "p6", name: "ITI Capital Ltd", logo: "/images/partners/iti-capital.png" },
-  { id: "p7", name: "IDFC Bank", logo: "/images/partners/idfc-bank.png" },
-  { id: "p8", name: "Magma (now Poonawalla Fincorp)", logo: "/images/partners/poonawalla.svg" },
-  { id: "p9", name: "Indiabulls IVL Finance", logo: "/images/partners/indiabulls.png" },
-  { id: "p10", name: "IndusInd Bank", logo: "/images/partners/indusind-bank.png" },
-  { id: "p11", name: "Fullerton India (now SMFG India Credit)", logo: "/images/partners/smfg-india-credit.svg" },
-  { id: "p12", name: "Bajaj Finserv", logo: "/images/partners/bajaj-finserv.png" },
-  { id: "p13", name: "Reliance Home Finance" },
-  { id: "p14", name: "Capital First", logo: "/images/partners/capital-first.png" },
-  { id: "p15", name: "Tata Capital", logo: "/images/partners/tata-capital.jpg" },
+export const businessServices = services.filter((s) => s.group === "business");
+export const alsoAvailable = services.filter((s) => s.group === "also");
+
+export const emiTool = {
+  slug: "emi-calculator",
+  title: "EMI Calculator",
+  description: "Estimate your monthly repayment before you borrow.",
+};
+
+/** Names only: no logos or partner artwork are shown on the site. */
+export const partners: string[] = [
+  "State Bank of India",
+  "HDFC Bank",
+  "ICICI Bank",
+  "Kotak Mahindra Bank",
+  "Yes Bank",
+  "IDFC FIRST Bank",
+  "IndusInd Bank",
+  "Standard Chartered",
+  "Deutsche Bank",
+  "Bajaj Finserv",
+  "Tata Capital",
+  "Poonawalla Fincorp",
+  "SMFG India Credit",
+  "Capital Float",
+  "Arohan",
+  "ITI Capital",
 ];
 
-export const teamMembers: TeamMember[] = [
+/**
+ * Client reviews. Intentionally empty: add real, approved reviews here and set
+ * SHOW_TESTIMONIALS = true in lib/site.ts to bring the section back.
+ */
+export const testimonials: Testimonial[] = [];
+
+/** Leadership profiles on /about. Add more people to this list. */
+export const leadership: Person[] = [
   {
-    id: "m1",
-    name: "Vinod Kumar Tiwari",
-    role: "Managing Director, Arena Financial Services",
-    email: "vinod@tiwarifinserv.com",
-    bio: [
-      "Mr. Vinod Kumar Tiwari founded the organization in the year 2008 after being associated with various financial institutions and gaining rich experience in finance and Sales. His entrepreneurial abilities in accomplishing business growth on a consistent basis in a structured and unstructured environment have helped Arena Financial Services to reach unforeseen heights and exceed forecasted projections of profit and growth. With his continuous involvement, the company has shown exponential growth through strong corporate relationship and customer satisfaction.",
-      "He has adopted the integrity pledge and committed to upholding the highest standards of honesty & integrity. He is a man of exemplary vision & strong professional commitment having inherent qualities of converting challenges into blessings with his determination & involvement of team.",
-    ],
-  },
-  {
-    id: "m2",
-    name: "Pramod Kumar Tiwari",
-    role: "Sales and Marketing Head, Arena Financial Services",
-    email: "pramod.afz@gmail.com",
-    bio: [
-      "Mr. Pramod Kumar Tiwari is a graduate from Saket University and is associated with Arena Financial Services since 2011. He is a proactive leader and planner with expertise in Sales and Marketing across urban and rural markets, customer lifecycle management, market execution, leading large Cross Functional transformational Projects, Cost engineering and mentoring young talent.",
-      "He has vast knowledge and experience in handling all kinds of loans like Business Loan, Personal Loan, Home Loan & Loan Against Property. Mr. Pramod maintains very good professional relations with all MNCs/Private Banks and NBFCs. With his motto to achieve long-term customer satisfaction, he is catering to the needs of customers across different fields and has involved the entire team to achieve the desired results.",
-    ],
-  },
-  {
-    id: "m3",
+    id: "p1",
+    slug: "sanjay-tiwari",
     name: "Sanjay Tiwari",
-    role: "Business and IT Head, Arena Financial Services",
-    email: "ceo@tiwarifinserv.com",
-    bio: [
-      "Mr. Sanjay Tiwari is a post-graduate from VTU Belgavi Karnataka and is associated with Arena Financial Services since 2016. He is a proactive leader with expertise in Marketing and mentoring young talent.",
-      "He has vast knowledge with experience of conducting and handling the technical training on various platforms for aspirants in networking. He has helped to orchestrate the restructuring and reorganization of locations. His strong work ethic, technical knowledge, and leadership have helped Arena Financial Services to grow.",
-    ],
+    role: "Founder & Managing Director",
+    bio: "Sanjay Tiwari founded Arena Financial Services in 2021 to give MSMEs and growing businesses a single, straightforward route to bank and NBFC credit. He brings over a decade of experience in MSME lending, credit appraisal and business development, with a working knowledge of RBI guidelines, CGTMSE and SIDBI schemes, and GST- and ITR-based financial assessment. He began his career as a Software Engineer at Infosys and holds a Master's degree from Visvesvaraya Technological University (VTU), Belagavi. At Arena he leads credit appraisal, lender relationships, technology and the advisory team.",
+    linkedin: "https://www.linkedin.com/in/sanjay-tiwari-a1750820",
   },
-  {
-    id: "m4",
-    name: "Ghata Shah",
-    role: "Co-founder, Secured Loans",
-    email: "ghatashah@tiwarifinserv.com",
-    bio: [
-      "Ms. Ghata Shah is basically from Gujarat and settled in Bangalore for more than a decade. She has completed her Master's in Commerce from Gujarat University and associated with Arena Financial Services since 2019 for the Secured vertical. She has also availed a Law degree and is currently pursuing her Final Chartered Accountancy course.",
-      "She has worked in various industries including credit/lending industry. She has rich experience in the entire gamut of accounting & finance operations which supports clients to improve their financial costs. She is a results-oriented, versatile, and creative leader with over twenty years of accounting as well as Banking experience which helps Arena Financial Services to grow.",
-    ],
-  },
-];
-
-export const financialConsultants: { id: string; name: string; role: string }[] = [
-  { id: "c1", name: "Vivek Tiwari", role: "Team Lead, Sales and Marketing" },
-  { id: "c2", name: "Suraj Tiwari", role: "Team Lead, Sales and Marketing" },
 ];
 
 export const faqItems: FaqItem[] = [
   {
     id: "f1",
-    question: "How long does loan approval typically take?",
-    answer:
-      "Most personal loans are approved within 24-48 hours of document submission, while business and home loans may take 5-10 working days depending on the lender's process.",
+    question: "Do you charge any fees?",
+    answer: "No. We do not charge any fees for arranging your loan.",
   },
   {
     id: "f2",
-    question: "What documents are required to apply?",
+    question: "Who gives the loan?",
     answer:
-      "Typically you'll need identity proof, address proof, income statements (salary slips or ITR), and bank statements for the last 6 months. Our team will guide you on exact requirements for your product.",
+      "Loans are given by our partner banks and NBFCs. For unsecured short-term debt, we also work with private investors. Arena Financial Services helps you choose the right lender and manages the process; the lender makes the final decision.",
   },
   {
     id: "f3",
-    question: "Do you charge any fee for consultation?",
+    question: "What documents are usually needed?",
     answer:
-      "Initial consultations are completely free. Any processing fees are charged only by the lending or insurance partner, and are always disclosed upfront.",
+      "Typically KYC, business registration, GST returns, ITRs, bank statements and financial statements. We share the exact list for your case.",
   },
   {
     id: "f4",
-    question: "Can I prepay or foreclose my loan early?",
+    question: "How long does it take?",
     answer:
-      "Yes, most of our partner lenders allow prepayment and foreclosure, though terms vary. We help you understand any applicable charges before you commit.",
+      "It depends on the product and the lender. Unsecured loans are usually faster than secured loans; we give you a realistic timeline at the start.",
   },
   {
     id: "f5",
-    question: "How many banking partners do you work with?",
-    answer:
-      "We work with over 25 banks and NBFCs, allowing us to compare offers and match you with the most suitable rates and terms.",
-  },
-  {
-    id: "f6",
-    question: "Is my personal information kept confidential?",
-    answer:
-      "Absolutely. We follow strict data protection protocols and only share your information with lenders you've explicitly chosen to apply through.",
-  },
-  {
-    id: "f7",
-    question: "Do you help with investment planning for beginners?",
-    answer:
-      "Yes, our investment advisors specialize in building simple, goal-based plans for first-time investors as well as seasoned portfolios.",
-  },
-  {
-    id: "f8",
-    question: "What if my loan application gets rejected?",
-    answer:
-      "Our team reviews your profile before submission to minimize rejection risk, and if it happens, we help identify alternate lenders or improve your eligibility.",
+    question: "Is my information kept confidential?",
+    answer: "Yes. Your documents are shared only with the lenders you agree to apply with.",
   },
 ];
 
@@ -313,29 +151,44 @@ export const processSteps: ProcessStep[] = [
   {
     id: "s1",
     step: "01",
-    title: "Apply",
-    description:
-      "Fill out a simple online application with your basic details and financial requirement.",
+    title: "Share your requirement",
+    description: "Tell us what you need and send basic business documents.",
   },
   {
     id: "s2",
     step: "02",
-    title: "Get Matched",
-    description:
-      "Our advisors match you with the best-fit lender or plan from our network of 25+ partners.",
+    title: "Get matched",
+    description: "We assess your profile and shortlist the lenders that fit.",
   },
   {
     id: "s3",
     step: "03",
-    title: "Approval",
-    description:
-      "Submit minimal documentation and receive approval, often within 24-48 hours.",
+    title: "Sanction",
+    description: "We coordinate with the lender through assessment and approval.",
   },
   {
     id: "s4",
     step: "04",
     title: "Disbursal",
-    description:
-      "Funds are disbursed directly to your account, or your policy is issued and activated.",
+    description: "Funds are released to your account. We stay your contact throughout.",
+  },
+];
+
+export const whyArena = [
+  {
+    title: "Honest advice",
+    text: "We explain the options and the costs. The lender makes the final decision, and we never present an estimate as an approval.",
+  },
+  {
+    title: "Plain language",
+    text: "Financial terms explained simply, without jargon.",
+  },
+  {
+    title: "Paperwork guidance",
+    text: "We tell you upfront what each lender will look for, so your file does not get stuck.",
+  },
+  {
+    title: "One point of contact",
+    text: "The same advisor from first call to disbursal.",
   },
 ];

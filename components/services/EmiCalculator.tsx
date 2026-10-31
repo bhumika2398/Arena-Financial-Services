@@ -53,7 +53,7 @@ function BreakdownDonut({
         cy="80"
         r={radius}
         fill="none"
-        stroke="#9de6c8"
+        stroke="#BCD0F8"
         strokeWidth="18"
       />
       <circle
@@ -61,7 +61,7 @@ function BreakdownDonut({
         cy="80"
         r={radius}
         fill="none"
-        stroke="#013f4a"
+        stroke="#1D4ED8"
         strokeWidth="18"
         strokeDasharray={`${principalLength} ${circumference - principalLength}`}
         strokeLinecap="round"
@@ -161,7 +161,7 @@ export function EmiCalculator() {
         </div>
       </div>
 
-      <div className="flex flex-col items-center justify-center gap-6 rounded-2xl bg-mint p-8 text-center">
+      <div className="flex flex-col items-center justify-center gap-6 rounded-[10px] bg-mint p-8 text-center">
         <div>
           <p className="text-sm font-semibold uppercase tracking-wide text-deep-400">
             Monthly EMI

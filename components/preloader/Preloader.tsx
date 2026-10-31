@@ -4,7 +4,7 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
-const SESSION_KEY = "tf-preloader-shown";
+const SESSION_KEY = "arena-preloader-shown";
 // Playback speed for the preloader video (1 = real time).
 const PLAYBACK_RATE = 1.75;
 // Used only when there is no video to wait on (reduced motion / video error).
@@ -28,7 +28,7 @@ export function Preloader() {
   // session (sessionStorage persists across reloads in the same tab, by
   // design — that's the "once per session" requirement). To see it again
   // during dev, either open a new tab, or in devtools run
-  // `sessionStorage.removeItem("tf-preloader-shown")` then reload.
+  // `sessionStorage.removeItem("arena-preloader-shown")` then reload.
   useEffect(() => {
     let alreadyShown = false;
     try {
@@ -41,14 +41,14 @@ export function Preloader() {
     // fixed. Open your browser's DevTools console (F12) when loading the
     // site to see these.
     console.log(
-      "[Preloader] mount check — sessionStorage 'tf-preloader-shown' =",
+      "[Preloader] mount check — sessionStorage 'arena-preloader-shown' =",
       alreadyShown ? "true (WILL be suppressed, see below)" : "not set (WILL render)",
     );
 
     if (alreadyShown) {
       console.log(
         "[Preloader] SUPPRESSED: already shown in this browser tab this session. " +
-          "To see it again, run in DevTools console: sessionStorage.removeItem('tf-preloader-shown') " +
+          "To see it again, run in DevTools console: sessionStorage.removeItem('arena-preloader-shown') " +
           "then reload — or open a new tab.",
       );
       // Must run post-mount: sessionStorage is only readable client-side,
@@ -151,7 +151,7 @@ export function Preloader() {
               : { opacity: 0, scale: 1.04 }
           }
           transition={{ duration: prefersReducedMotion ? 0.3 : 0.7, ease: "easeInOut" }}
-          className="fixed inset-0 z-[100] flex items-center justify-center overflow-hidden bg-deep-950"
+          className="fixed inset-0 z-[100] flex items-center justify-center overflow-hidden bg-deep-900"
         >
           {!prefersReducedMotion && !videoFailed ? (
             <video
@@ -190,7 +190,7 @@ export function Preloader() {
                 );
                 // Explicit fallback: stop rendering the <video> element
                 // entirely so there's no broken/blank video box — the
-                // gradient scrim + corner glows + logo reveal below are a
+                // navy overlay + logo reveal below are a
                 // complete preloader on their own (this is exactly what
                 // reduced-motion users already see).
                 setVideoFailed(true);
@@ -200,29 +200,8 @@ export function Preloader() {
             />
           ) : null}
 
-          {/* Dark gradient scrim so the logo stays legible over the video */}
-          <div
-            aria-hidden
-            className="absolute inset-0 bg-gradient-to-b from-deep-950/70 via-deep-950/50 to-deep-950/80"
-          />
-
-          {/* Ambient breathing glow, anchored to the corners */}
-          <div
-            aria-hidden
-            className={
-              prefersReducedMotion
-                ? "absolute -left-40 -top-40 h-96 w-96 rounded-full bg-primary-600/25 blur-3xl"
-                : "absolute -left-40 -top-40 h-96 w-96 animate-pulse-glow rounded-full bg-primary-600/25 blur-3xl"
-            }
-          />
-          <div
-            aria-hidden
-            className={
-              prefersReducedMotion
-                ? "absolute -bottom-40 -right-40 h-96 w-96 rounded-full bg-sage-500/20 blur-3xl"
-                : "absolute -bottom-40 -right-40 h-96 w-96 animate-pulse-glow rounded-full bg-sage-500/20 blur-3xl [animation-delay:1.5s]"
-            }
-          />
+          {/* Flat navy overlay (~70%) so the logo stays legible over the video */}
+          <div aria-hidden className="absolute inset-0 bg-deep-900/70" />
 
           <div className="relative flex flex-col items-center gap-5 px-6 text-center">
             <motion.div
@@ -241,7 +220,7 @@ export function Preloader() {
             </motion.div>
 
             {/* Animated underline that fills as the "load" progresses */}
-            <div className="h-[2px] w-40 overflow-hidden rounded-full bg-mint/10 sm:w-56">
+            <div className="h-[2px] w-40 overflow-hidden bg-white/15 sm:w-56">
               <motion.div
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}
@@ -251,7 +230,7 @@ export function Preloader() {
                   ease: "easeInOut",
                 }}
                 style={{ originX: 0 }}
-                className="h-full w-full bg-gradient-to-r from-primary-500 to-sage-400"
+                className="h-full w-full bg-primary-300"
               />
             </div>
 
@@ -262,9 +241,9 @@ export function Preloader() {
                 duration: 0.6,
                 delay: prefersReducedMotion ? 0.1 : 1.5,
               }}
-              className="text-xs font-semibold uppercase tracking-[0.35em] text-mint"
+              className="text-sm font-semibold tracking-wide text-white"
             >
-              Loans. Simplified.
+              Transparency is our Policy
             </motion.p>
           </div>
         </motion.div>

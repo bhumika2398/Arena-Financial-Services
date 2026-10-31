@@ -14,7 +14,7 @@ export function SectionHeading({
   eyebrow,
   title,
   subtitle,
-  align = "center",
+  align = "left",
   className,
   titleClassName,
   subtitleClassName,

@@ -3,9 +3,8 @@ import { notFound } from "next/navigation";
 import { ServicePage } from "@/components/services/ServicePage";
 import { contentBySlug, serviceContent } from "@/lib/service-content";
 
-// "emi-calculator" is served by its own dedicated interactive page
-// (app/services/emi-calculator/page.tsx), which Next.js resolves ahead of
-// this dynamic route.
+// "emi-calculator" is served by its own page (app/services/emi-calculator),
+// which Next.js resolves ahead of this dynamic route.
 interface ServiceDetailPageProps {
   params: Promise<{ slug: string }>;
 }

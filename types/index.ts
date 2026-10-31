@@ -1,17 +1,10 @@
 export interface Service {
   slug: string;
-  icon: string;
   title: string;
+  /** One line, shown on cards. */
   description: string;
-  details: string[];
-}
-
-export interface Stat {
-  label: string;
-  value: number;
-  suffix?: string;
-  /** Small qualifier shown above the number, e.g. "Over". */
-  prefix?: string;
+  /** "business" services form the main grid; "also" are shown as a quieter row. */
+  group: "business" | "also";
 }
 
 export interface Testimonial {
@@ -19,23 +12,18 @@ export interface Testimonial {
   name: string;
   role: string;
   quote: string;
-  rating: number;
-  loanType?: string;
+  /** Service the client used, e.g. "Working Capital". Shown on the card front. */
+  service: string;
 }
 
-export interface Partner {
-  id: string;
-  name: string;
-  /** Path under /public, e.g. /images/partners/yes-bank.svg. Omit for text fallback. */
-  logo?: string;
-}
-
-export interface TeamMember {
+export interface Person {
   id: string;
   name: string;
   role: string;
-  bio: string[];
-  email: string;
+  bio: string;
+  linkedin?: string;
+  /** Photo is /public/images/team/<slug>.jpg when that file exists. */
+  slug: string;
 }
 
 export interface FaqItem {

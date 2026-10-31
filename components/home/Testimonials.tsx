@@ -6,6 +6,7 @@ import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { TestimonialFlipCard } from "@/components/testimonials/TestimonialFlipCard";
 import { testimonials } from "@/lib/data";
+import { SHOW_TESTIMONIALS } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 const CARDS_PER_SET = 3;
@@ -15,6 +16,7 @@ export function Testimonials() {
   const [page, setPage] = useState(0);
   const [mobileIndex, setMobileIndex] = useState(0);
 
+  const enabled = SHOW_TESTIMONIALS && testimonials.length > 0;
   const pageCount = Math.ceil(testimonials.length / CARDS_PER_SET);
 
   const sets = useMemo(() => {
@@ -35,16 +37,17 @@ export function Testimonials() {
     }
   }
 
+  if (!enabled) return null;
+
   return (
     <section
       id="testimonials"
       className="relative scroll-mt-24 overflow-hidden bg-mint py-10"
     >
-      <Container className="relative z-10 flex max-w-[88rem] flex-col items-center gap-8">
+      <Container className="relative z-10 flex max-w-6xl flex-col gap-6">
         <SectionHeading
           eyebrow="Client Stories"
           title="What Our Customers Say"
-          align="center"
         />
 
         {/* Desktop: 3-up grid of flip cards, staggered auto-flip */}
@@ -86,7 +89,7 @@ export function Testimonials() {
               aria-label={`Show testimonial set ${i + 1}`}
               onClick={() => setPage(i)}
               className={cn(
-                "h-6 w-8 rounded-md border transition-all",
+                "h-6 w-8 rounded-[6px] border transition-all",
                 i === page
                   ? "border-primary-600 bg-primary-600/20"
                   : "border-deep-200 bg-white hover:border-primary-400",
@@ -104,7 +107,7 @@ export function Testimonials() {
               aria-label={`Show testimonial ${i + 1}`}
               onClick={() => setMobileIndex(i)}
               className={cn(
-                "h-5 w-7 rounded-md border transition-all",
+                "h-5 w-7 rounded-[6px] border transition-all",
                 i === mobileIndex
                   ? "border-primary-600 bg-primary-600/20"
                   : "border-deep-200 bg-white hover:border-primary-400",

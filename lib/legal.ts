@@ -3,8 +3,7 @@ import path from "node:path";
 
 /**
  * Loads content/legal/<slug>.txt and turns it into a structured document.
- * The .txt files stay the source of truth; every wording change applied on
- * the way in is listed in EDITS below so it is easy to audit.
+ * The .txt files in content/legal are the source of truth for the wording.
  */
 
 export type ListItem = { text: string; children?: ListItem[] };
@@ -18,25 +17,8 @@ export type Block =
 export type Section = { id: string; num: string; title: string; blocks: Block[] };
 export type LegalDoc = { title: string; lastUpdated: string | null; sections: Section[] };
 
-/** Ordered text edits applied to the raw file (see summary for the audit list). */
-const EDITS: [RegExp | string, string][] = [
-  // Broken address: use the contact email already present in the document.
-  ["grievances@Tiwari Capital.com", "response@tiwarifinserv.com"],
-  // Terms 2: unbalanced quote around the company name.
-  ["(‘Tiwari Financial Services, ‘we’ or ‘us’)", "(‘Arena Financial Services’, ‘we’ or ‘us’)"],
-  // Terms 13.6/13.7: stray full stops after the company name, duplicated clause number.
-  [/13\.6\s+13\.6/, "13.6"],
-  ["Tiwari financial services., its", "Tiwari financial services, its"],
-  ["Tiwari financial services.. The", "Tiwari financial services. The"],
-  // Company name.
-  [/Tiwari (Financial Services|Financial Solutions|Capital|financial services)/gi, "Arena Financial Services"],
-  [/\bTCFS\b/g, "Arena Financial Services"],
-  // Typos.
-  ["situation at at", "situated at"],
-  ["Rustom Bhag", "Rustam Bhag"],
-  ["thereunde,", "thereunder,"],
-  ["Regulation1 (Regulation", "Regulation (Regulation"],
-];
+/** Text edits applied on load (none: the .txt files carry the final wording). */
+const EDITS: [RegExp | string, string][] = [];
 
 function applyEdits(raw: string) {
   let s = raw.replace(/^﻿/, "").replace(/\r\n/g, "\n");

@@ -83,7 +83,7 @@ function BlockView({ b }: { b: Block }) {
       );
     case "kv":
       return (
-        <div className="flex flex-col gap-1 rounded-lg border border-deep-100 bg-mint/60 p-4 text-[0.95rem]">
+        <div className="flex flex-col gap-1 rounded-[6px] border border-deep-100 bg-mint/60 p-4 text-[0.95rem]">
           {b.lines.map((l, i) => (
             <p key={i}>{linkify(l)}</p>
           ))}
@@ -92,7 +92,7 @@ function BlockView({ b }: { b: Block }) {
     case "table":
       return (
         <div
-          className="overflow-x-auto rounded-lg border border-deep-100"
+          className="overflow-x-auto rounded-[6px] border border-deep-100"
           tabIndex={0}
           role="region"
           aria-label="Cookies table"
@@ -173,7 +173,7 @@ export function LegalDocument({
             onClick={() => jump(s.id)}
             aria-current={active === s.id ? "true" : undefined}
             className={cn(
-              "flex gap-2 rounded-md border-l-2 px-3 py-1.5 transition-colors",
+              "flex gap-2 rounded-[6px] border-l-2 px-3 py-1.5 transition-colors",
               active === s.id
                 ? "border-primary-500 bg-primary-50 font-semibold text-primary-800"
                 : "border-transparent text-deep-500 hover:bg-deep-50 hover:text-deep-900",
@@ -213,7 +213,7 @@ export function LegalDocument({
               type="button"
               onClick={() => setTocOpen((v) => !v)}
               aria-expanded={tocOpen}
-              className="flex min-h-11 w-full items-center justify-between rounded-xl border border-deep-200 bg-white px-4 py-2.5 text-left font-semibold text-deep-900 shadow-sm"
+              className="flex min-h-11 w-full items-center justify-between rounded-[10px] border border-deep-200 bg-white px-4 py-2.5 text-left font-semibold text-deep-900 shadow-sm"
             >
               Jump to section
               <ChevronDown
@@ -221,7 +221,7 @@ export function LegalDocument({
               />
             </button>
             {tocOpen ? (
-              <div className="mt-2 max-h-[60vh] overflow-y-auto rounded-xl border border-deep-100 bg-white p-2">
+              <div className="mt-2 max-h-[60vh] overflow-y-auto rounded-[10px] border border-deep-100 bg-white p-2">
                 {toc}
               </div>
             ) : null}
@@ -264,7 +264,7 @@ export function LegalDocument({
               </section>
             ))}
 
-            <div className="mt-6 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-deep-100 bg-mint/60 p-4 print:hidden">
+            <div className="mt-6 flex flex-wrap items-center justify-between gap-3 rounded-[10px] border border-deep-100 bg-mint/60 p-4 print:hidden">
               <span className="font-semibold text-deep-900">Also read:</span>
               <Link
                 href={other.href}
@@ -283,7 +283,7 @@ export function LegalDocument({
         style={{ bottom: "calc(1.25rem + var(--consent-h, 0px))" }}
         onClick={() => window.scrollTo({ top: 0, behavior: reduced ? "auto" : "smooth" })}
         className={cn(
-          "fixed right-5 z-40 flex h-11 w-11 items-center justify-center rounded-xl bg-deep-900 text-white shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:bg-deep-800 print:hidden",
+          "fixed right-5 z-40 flex h-11 w-11 items-center justify-center rounded-[10px] bg-deep-900 text-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-deep-800 print:hidden",
           showTop ? "opacity-100" : "pointer-events-none opacity-0",
         )}
       >
