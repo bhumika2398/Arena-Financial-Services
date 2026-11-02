@@ -100,7 +100,7 @@ export function EnquiryForm() {
         ) : (
           <form onSubmit={handleSubmit(onSubmit)} noValidate className="flex flex-col gap-4">
             <div className="grid gap-4 sm:grid-cols-2">
-              <Field label="Name*" error={errors.name?.message}>
+              <Field label="Name" error={errors.name?.message}>
                 <input type="text" autoComplete="name" {...register("name")} className={inputClass} />
               </Field>
               <Field label="Mobile number*" error={errors.mobile?.message}>
