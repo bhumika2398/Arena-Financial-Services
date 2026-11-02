@@ -123,18 +123,18 @@ export function Footer() {
           <div className="flex flex-col gap-1.5 border-t border-white/10 pt-4 md:flex-row md:items-center md:justify-between">
             <p>© 2026 Arena Financial Services. All rights reserved.</p>
             <p>{SITE.partnerNote}</p>
-            <p>
-              Designed &amp; Developed by{" "}
-              <a
-                href="https://www.naazailabs.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-semibold text-white underline-offset-2 hover:underline"
-              >
-                Naaz AI Labs
-              </a>
-            </p>
           </div>
+          <p className="pt-3 text-center">
+            Designed &amp; Developed by{" "}
+            <a
+              href="https://www.naazailabs.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-white underline-offset-2 hover:underline"
+            >
+              Naaz AI Labs
+            </a>
+          </p>
         </Container>
       </div>
     </footer>
