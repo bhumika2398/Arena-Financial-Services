@@ -73,6 +73,13 @@ export function Hero() {
             ))}
           </h1>
 
+          <motion.p
+            {...rise(0.6)}
+            className="max-w-2xl border-l-4 border-primary-400 pl-4 font-display text-xl font-bold leading-snug text-white sm:text-2xl lg:text-3xl"
+          >
+            Business finance made simple: <span className="text-primary-300">clear advice, the right lender, one point of contact</span>
+          </motion.p>
+
           <motion.p {...rise(0.7)} className="max-w-xl text-lg leading-relaxed text-deep-100">
             Arena Financial Services helps MSMEs and growing businesses find the right loan from 35+
             banks and NBFCs, with clear advice and one point of contact from application to disbursal.

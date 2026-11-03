@@ -18,8 +18,8 @@ export const SITE = {
     region: "Karnataka",
     country: "IN",
   },
-  hours: "Mon-Fri, 10 AM - 7 PM",
-  hoursLong: "Monday to Friday, 10:00 AM to 7:00 PM",
+  hours: "Mon-Sat, 10 AM - 7 PM",
+  hoursLong: "Monday to Saturday, 10:00 AM to 7:00 PM",
   partnerNote: "In association with Tiwari Financial Services, our Business Partner.",
 } as const;
 
