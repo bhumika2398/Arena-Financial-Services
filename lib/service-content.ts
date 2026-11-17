@@ -57,6 +57,10 @@ export const serviceContent: ServiceContent[] = [
       "Offers compared across multiple banks and NBFCs",
       "Eligibility assessed on GST, ITR and banking",
     ],
+    glance: [
+      { label: "Tenure", value: "1 to 4 years" },
+      { label: "Security", value: "None: no property, guarantor or hypothecation" },
+    ],
     documents: [...BUSINESS_DOCUMENTS, "Existing loan sanction letters and loan statements (if any)"],
   },
   {
@@ -73,6 +77,9 @@ export const serviceContent: ServiceContent[] = [
       "Interest rate linked to the lender's benchmark (usually floating), charged only on the amount used",
       "No fixed EMIs: repay and redraw any time within the limit",
       "Limits are usually renewed every 12 months",
+    ],
+    glance: [
+      { label: "Security", value: "Secured (property, stock, receivables) or unsecured OD" },
     ],
     documents: [
       ...BUSINESS_DOCUMENTS,
@@ -95,6 +102,10 @@ export const serviceContent: ServiceContent[] = [
       "Built for urgent fund requirements",
       "Time sensitivity is our top priority",
     ],
+    glance: [
+      { label: "Tenure", value: "Up to 10 months" },
+      { label: "Security", value: "Unsecured" },
+    ],
     documents: BUSINESS_DOCUMENTS,
     note: "Final approval, loan amount and cost are decided by the lender or financier.",
   },
@@ -111,6 +122,9 @@ export const serviceContent: ServiceContent[] = [
       "Long-term repayment in monthly EMIs",
       "Also available as an overdraft (dropline OD), where interest is charged only on the amount used",
       "No prepayment charges on floating-rate loans to individuals and micro and small enterprises sanctioned from 1 January 2026, as per RBI rules. Other cases as per the lender.",
+    ],
+    glance: [
+      { label: "Security", value: "Property you own" },
     ],
     documents: [
       ...BUSINESS_DOCUMENTS,
@@ -133,6 +147,10 @@ export const serviceContent: ServiceContent[] = [
       "Fixed or floating interest rate",
       "Repaid over 1 to 7 years for machinery (longer for expansion term loans)",
       "Machinery loans may qualify for CGTMSE cover, so no extra collateral may be needed",
+    ],
+    glance: [
+      { label: "Tenure", value: "1 to 7 years for machinery" },
+      { label: "Security", value: "The machinery bought, usually" },
     ],
     documents: [
       ...BUSINESS_DOCUMENTS,
