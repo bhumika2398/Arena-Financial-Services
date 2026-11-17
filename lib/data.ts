@@ -4,7 +4,7 @@ export const services: Service[] = [
   {
     slug: "business-loan",
     title: "Business Loan (Unsecured)",
-    description: "Collateral-free funding for 1 to 5 years.",
+    description: "Collateral-free funding for 1 to 4 years.",
     group: "business",
   },
   {
@@ -28,7 +28,7 @@ export const services: Service[] = [
   {
     slug: "term-loan-machinery-finance",
     title: "Term Loan & Machinery Finance",
-    description: "Fixed-tenure funding for expansion and equipment.",
+    description: "Fixed-tenure funding for machinery and expansion.",
     group: "business",
   },
   {
@@ -58,13 +58,13 @@ export const services: Service[] = [
   {
     slug: "home-loan",
     title: "Home Loan",
-    description: "Long-tenure finance to buy or build your home.",
+    description: "Long-tenure finance to buy, build or transfer your home loan.",
     group: "also",
   },
   {
     slug: "personal-loan",
     title: "Personal Loan",
-    description: "Collateral-free funds for personal needs.",
+    description: "Collateral-free funds for personal needs, based on your income and CIBIL score.",
     group: "also",
   },
 ];

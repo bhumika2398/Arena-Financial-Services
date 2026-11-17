@@ -46,7 +46,7 @@ export const serviceContent: ServiceContent[] = [
     slug: "business-loan",
     metaTitle: "Business Loan (Unsecured)",
     metaDescription:
-      "Short-term unsecured business loans of 1 to 5 years from banks and NBFCs, with no collateral, guarantor or hypothecation.",
+      "Unsecured business loans of 1 to 4 years from banks and NBFCs, with no collateral, guarantor or hypothecation.",
     what: "An unsecured business term loan from banks and NBFCs, repaid in monthly EMIs over 1 to 4 years. No property, guarantor or asset hypothecation is needed, and you decide how to use the funds: working capital, stock, expansion or repaying costlier debt.",
     suits:
       "Self-employed individuals and business owners aged 21 to 65, including proprietorships, partnerships and private or public limited companies in manufacturing, trading and services. The business should have run continuously for the last 3 years, with positive turnover and profit trends over the last 2 years. Turnover requirements vary by lender. A healthy CIBIL score and regular banking through the business account help get better offers.",
@@ -86,11 +86,11 @@ export const serviceContent: ServiceContent[] = [
     slug: "short-term-finance",
     metaTitle: "Short Term Finance",
     metaDescription:
-      "Short term credit from leading lenders for a 10 months duration, for urgent fund requirements.",
+      "Quick, unsecured funding for up to 10 months to bridge an urgent cash gap.",
     what: "Quick, unsecured funding for up to 10 months to bridge an urgent cash gap: a large order, a tax or supplier payment, or the wait for a bank loan to be disbursed. Arranged through Arena's network of Investors",
     suits: "Businesses with an urgent fund requirement that need funds for a short period.",
     features: [
-      "Duration of 10 months",
+      "Up to 10 months",
       "Credit from leading lenders",
       "Built for urgent fund requirements",
       "Time sensitivity is our top priority",
@@ -124,7 +124,7 @@ export const serviceContent: ServiceContent[] = [
     slug: "term-loan-machinery-finance",
     metaTitle: "Term Loan & Machinery Finance",
     metaDescription:
-      "Term loans with a fixed repayment schedule for equipment, expansion and working capital.",
+      "Term loans with a fixed repayment schedule for machinery and expansion.",
     what: "A loan from a bank or NBFC for a fixed amount and tenure, repaid in EMIs. It is used to buy new or used machinery and equipment, or to expand capacity. The machinery bought is usually the security.",
     suits:
       "Manufacturing and service businesses buying machinery or expanding, that can bring in their own share (margin) of the cost.",
@@ -227,7 +227,7 @@ export const serviceContent: ServiceContent[] = [
   {
     slug: "home-loan",
     metaTitle: "Home Loan",
-    metaDescription: "Home purchase, home improvement and home construction loans from banks and other lenders.",
+    metaDescription: "Home purchase, improvement, construction, balance transfer and top-up loans from banks and other lenders.",
     what: "Money borrowed from a bank or other organisation for a fixed period to purchase, build, repair or revamp a residential property. Interest is charged on the amount borrowed and paid alongside the principal.",
     suits: "Individuals who want to buy a home, renovate or repair one, or build on a plot of land.",
     features: [
@@ -245,13 +245,13 @@ export const serviceContent: ServiceContent[] = [
   {
     slug: "personal-loan",
     metaTitle: "Personal Loan",
-    metaDescription: "Unsecured personal loans with a typical tenure of 1 to 5 years, assessed on your CIBIL score.",
+    metaDescription: "Unsecured personal loans with a typical tenure of 1 to 5 years, assessed on your income and CIBIL score.",
     what: "A loan that does not need you to pledge any asset as security. You are free to use the money as you like, for example a wedding, travel, medical costs or other personal needs.",
     suits: "Salaried and self-employed individuals with a steady income. Lenders look at your income and your CIBIL score.",
     features: [
       "Unsecured: no asset to pledge",
       "Typical tenure of 1 to 5 years",
-      "Assessed on your CIBIL score",
+      "Assessed on your income and CIBIL score",
       "Free to use for any purpose",
     ],
     documents: ["KYC", "Income documents", "Bank statements"],
