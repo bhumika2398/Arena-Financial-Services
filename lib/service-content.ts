@@ -11,15 +11,18 @@ export const STANDARD_NOTE = "Final approval, loan amount and interest rate are 
 export const SECONDARY_NOTE = "The final decision lies with the banks and NBFCs.";
 
 /** Base document list shared by the core loan pages. */
-export const BUSINESS_DOCUMENTS = [
+const BASE_LIST = [
   "KYC of the business and promoters",
   "Business registration / Udyam certificate",
   "Last 12 months GST returns",
   "Last 2 years ITR with computation",
   "Last 2 years audited financials",
   "Last 12 months bank statements",
-  "Few other documents as per the Banks/NBFCs",
 ];
+export const CATCH_ALL_DOCUMENT = "Few other documents as per the Banks/NBFCs";
+/** "Base list plus ...": the base list, the page's extra items, then the catch-all line last. */
+const baseList = (...extra: string[]) => [...BASE_LIST, ...extra, CATCH_ALL_DOCUMENT];
+export const BUSINESS_DOCUMENTS = baseList();
 export const DOCUMENTS_NOTE = "We share the exact list for your case.";
 
 export interface ServiceContent {
@@ -61,7 +64,7 @@ export const serviceContent: ServiceContent[] = [
       { label: "Tenure", value: "1 to 4 years" },
       { label: "Security", value: "None: no property, guarantor or hypothecation" },
     ],
-    documents: [...BUSINESS_DOCUMENTS, "Existing loan sanction letters and loan statements (if any)"],
+    documents: baseList("Existing loan sanction letters and loan statements (if any)"),
   },
   {
     slug: "working-capital",
@@ -81,12 +84,11 @@ export const serviceContent: ServiceContent[] = [
     glance: [
       { label: "Security", value: "Secured (property, stock, receivables) or unsecured OD" },
     ],
-    documents: [
-      ...BUSINESS_DOCUMENTS,
+    documents: baseList(
       "Stock and debtors statement",
       "Projected turnover / CMA data (for larger limits)",
       "Existing OD/CC sanction letter (for takeover or enhancement)",
-    ],
+    ),
     draft: "DRAFT - client to review: Cash credit sentence and the documents list are newly written.",
   },
   {
@@ -126,13 +128,12 @@ export const serviceContent: ServiceContent[] = [
     glance: [
       { label: "Security", value: "Property you own" },
     ],
-    documents: [
-      ...BUSINESS_DOCUMENTS,
+    documents: baseList(
       "Title deed and chain documents",
       "Approved building plan",
       "Latest property tax receipt",
       "Encumbrance certificate",
-    ],
+    ),
   },
   {
     slug: "term-loan-machinery-finance",
@@ -152,11 +153,10 @@ export const serviceContent: ServiceContent[] = [
       { label: "Tenure", value: "1 to 7 years for machinery" },
       { label: "Security", value: "The machinery bought, usually" },
     ],
-    documents: [
-      ...BUSINESS_DOCUMENTS,
+    documents: baseList(
       "Quotation or proforma invoice of the machinery",
       "Project report (for expansion loans)",
-    ],
+    ),
   },
   {
     slug: "project-funding",
@@ -172,15 +172,14 @@ export const serviceContent: ServiceContent[] = [
       "Repayment matched to projected cash flows",
       "Help preparing the project report and CMA data",
     ],
-    documents: [
-      ...BUSINESS_DOCUMENTS,
+    documents: baseList(
       "Detailed project report (DPR)",
       "CMA data / projections",
       "Quotations for machinery and civil work",
       "Land or lease documents",
       "Approvals and licences",
       "Proof of promoter contribution",
-    ],
+    ),
   },
   {
     slug: "cgtmse-loans",
@@ -219,7 +218,7 @@ export const serviceContent: ServiceContent[] = [
       "Repaid when your customer pays the invoice",
       "Helps when cash is tied up in receivables",
     ],
-    documents: [...BUSINESS_DOCUMENTS, "Sales invoices", "Purchase orders", "Buyer details", "Debtors ageing list"],
+    documents: baseList("Sales invoices", "Purchase orders", "Buyer details", "Debtors ageing list"),
     draft: "DRAFT - client to review: Whole page newly written.",
   },
   {
@@ -235,11 +234,10 @@ export const serviceContent: ServiceContent[] = [
       "Issued against a cash margin or fixed deposit, or within your working capital limit",
       "Commission charged as per the lender",
     ],
-    documents: [
-      ...BUSINESS_DOCUMENTS,
+    documents: baseList(
       "Tender document, work order or purchase order",
       "Beneficiary's BG format (if any)",
-    ],
+    ),
     draft: "DRAFT - client to review: Whole page newly written.",
   },
   {

@@ -7,7 +7,7 @@ import type { ReactNode } from "react";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { services } from "@/lib/data";
-import { DOCUMENTS_NOTE, STANDARD_NOTE, type ServiceContent } from "@/lib/service-content";
+import { CATCH_ALL_DOCUMENT, DOCUMENTS_NOTE, STANDARD_NOTE, type ServiceContent } from "@/lib/service-content";
 import { SITE } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
@@ -114,15 +114,16 @@ export function ServicePage({ content }: { content: ServiceContent }) {
             </Block>
 
             <Block n="04" title="Documents needed" i={3}>
-              <ul className="flex flex-wrap gap-2">
+              <ul className="grid gap-x-8 gap-y-2.5 sm:grid-cols-2">
                 {content.documents.map((d) => (
-                  <li key={d} className="rounded-full border border-deep-200 bg-white px-3.5 py-1.5 text-sm font-semibold text-deep-800">
-                    {d}
+                  <li key={d} className="flex items-start gap-3 text-deep-800">
+                    <span aria-hidden className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary-600" />
+                    <span className="leading-snug">{d}</span>
                   </li>
                 ))}
               </ul>
               {content.documentsExtra ? <p className="mt-4 font-semibold text-deep-800">{content.documentsExtra}</p> : null}
-              <p className="mt-4 text-deep-600">{DOCUMENTS_NOTE}</p>
+              {content.documents.includes(CATCH_ALL_DOCUMENT) ? null : <p className="mt-4 text-deep-600">{DOCUMENTS_NOTE}</p>}
             </Block>
 
             <p className="rounded-[12px] border border-deep-200 bg-white px-5 py-4 text-sm text-deep-600">{content.note ?? STANDARD_NOTE}</p>
