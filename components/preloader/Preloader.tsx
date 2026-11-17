@@ -4,8 +4,9 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
 
 const SESSION_KEY = "arena-preloader-shown";
-// Words fade in over ~1s, hold briefly, then the screen fades out (~0.5s): about 2s in total.
-const HOLD_MS = 1500;
+// Words fade in, the bar fills from 0.3s to 1.8s, holds ~0.2s, then the screen
+// fades out (~0.5s): about 2.5s in total.
+const HOLD_MS = 2000;
 const WORDS = ["Arena", "Financial", "Services"];
 
 export function Preloader() {
@@ -86,7 +87,7 @@ export function Preloader() {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: prefersReducedMotion ? 0.3 : 0.5, ease: "easeInOut" }}
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-deep-900 px-6"
+          className="fixed inset-0 z-[100] flex flex-col items-center justify-center gap-6 bg-deep-900 px-6"
         >
           <p className="flex flex-wrap items-center justify-center gap-x-[0.3em] text-center font-display text-3xl font-bold tracking-tight text-white sm:text-5xl">
             {WORDS.map((word, i) => (
@@ -100,6 +101,19 @@ export function Preloader() {
               </motion.span>
             ))}
           </p>
+
+          {/* Thin bar that fills left to right; reduced motion gets a plain fade with no bar */}
+          {prefersReducedMotion ? null : (
+            <div aria-hidden className="h-[2px] w-44 overflow-hidden bg-white/15 sm:w-60">
+              <motion.div
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 1.5, delay: 0.3, ease: "easeInOut" }}
+                style={{ originX: 0 }}
+                className="h-full w-full bg-primary-300"
+              />
+            </div>
+          )}
         </motion.div>
       ) : null}
     </AnimatePresence>
