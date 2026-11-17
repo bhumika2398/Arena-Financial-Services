@@ -1,19 +1,12 @@
 "use client";
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 const SESSION_KEY = "arena-preloader-shown";
-// Playback speed for the preloader video (1 = real time).
-const PLAYBACK_RATE = 1.75;
-// Used only when there is no video to wait on (reduced motion / video error).
-const NO_VIDEO_DURATION_MS = 1800;
-// finance_video_5.mp4 runs ~10.07s at 1x, i.e. ~5.75s at PLAYBACK_RATE. The video's real "ended" event is the
-// primary trigger; this is ONLY a safety net so a stalled/broken video can
-// never trap users on the preloader. It must exceed the video length plus
-// buffering time, otherwise it would cut the video short.
-const SAFETY_TIMEOUT_MS = 8000;
+// Words fade in over ~1s, hold briefly, then the screen fades out (~0.5s): about 2s in total.
+const HOLD_MS = 1500;
+const WORDS = ["Arena", "Financial", "Services"];
 
 export function Preloader() {
   const prefersReducedMotion = useReducedMotion();
@@ -21,14 +14,11 @@ export function Preloader() {
   // true/false once we know whether to render it at all.
   const [shouldRender, setShouldRender] = useState<boolean | null>(null);
   const [visible, setVisible] = useState(true);
-  const [videoFailed, setVideoFailed] = useState(false);
-  const videoRef = useRef<HTMLVideoElement | null>(null);
 
-  // NOTE for local testing: this only ever shows once per browser TAB
-  // session (sessionStorage persists across reloads in the same tab, by
-  // design — that's the "once per session" requirement). To see it again
-  // during dev, either open a new tab, or in devtools run
-  // `sessionStorage.removeItem("arena-preloader-shown")` then reload.
+  // This only ever shows once per browser TAB session (sessionStorage persists
+  // across reloads in the same tab, by design). To see it again during dev,
+  // open a new tab, or run `sessionStorage.removeItem("arena-preloader-shown")`
+  // in devtools and reload.
   useEffect(() => {
     let alreadyShown = false;
     try {
@@ -37,20 +27,7 @@ export function Preloader() {
       // sessionStorage unavailable (privacy mode etc.) — just show it once.
     }
 
-    // TEMPORARY DEBUG LOGGING — remove once the video issue is confirmed
-    // fixed. Open your browser's DevTools console (F12) when loading the
-    // site to see these.
-    console.log(
-      "[Preloader] mount check — sessionStorage 'arena-preloader-shown' =",
-      alreadyShown ? "true (WILL be suppressed, see below)" : "not set (WILL render)",
-    );
-
     if (alreadyShown) {
-      console.log(
-        "[Preloader] SUPPRESSED: already shown in this browser tab this session. " +
-          "To see it again, run in DevTools console: sessionStorage.removeItem('arena-preloader-shown') " +
-          "then reload — or open a new tab.",
-      );
       // Must run post-mount: sessionStorage is only readable client-side,
       // and the initial render has to stay SSR-safe (null → nothing shown).
       // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -58,58 +35,20 @@ export function Preloader() {
       return;
     }
 
-    console.log("[Preloader] rendering now.");
     setShouldRender(true);
     try {
       sessionStorage.setItem(SESSION_KEY, "true");
     } catch {
       // Non-fatal — worst case the preloader replays once more.
     }
-
   }, []);
 
-  // Safety net + no-video path. With a playing video, the 'ended' event
-  // (see onEnded below) dismisses the preloader; this timer only fires if
-  // that never happens.
+  // Dismiss after the entrance has played.
   useEffect(() => {
     if (!shouldRender) return;
-    const ms =
-      prefersReducedMotion || videoFailed ? NO_VIDEO_DURATION_MS : SAFETY_TIMEOUT_MS;
-    const timer = setTimeout(() => {
-      console.warn("[Preloader] dismissing via timeout after", ms, "ms (video 'ended' did not fire)");
-      setVisible(false);
-    }, prefersReducedMotion ? 300 : ms);
+    const timer = setTimeout(() => setVisible(false), prefersReducedMotion ? 300 : HOLD_MS);
     return () => clearTimeout(timer);
-  }, [shouldRender, prefersReducedMotion, videoFailed]);
-
-  // Belt-and-suspenders autoplay fix: the `autoPlay` HTML attribute can be
-  // silently ignored by the browser (no `error` event fires at all — this
-  // is the single most common reason a video "loads fine but never plays"
-  // and is invisible to onError-based debugging) if the muted PROPERTY
-  // isn't already true at the moment the browser evaluates autoplay
-  // eligibility. Explicitly setting `.muted = true` and calling `.play()`
-  // ourselves, and logging any rejection, surfaces this class of failure.
-  useEffect(() => {
-    if (!shouldRender || prefersReducedMotion || videoFailed) return;
-    const el = videoRef.current;
-    if (!el) return;
-    el.muted = true;
-    el.playbackRate = PLAYBACK_RATE;
-    const playPromise = el.play();
-    if (playPromise) {
-      playPromise
-        .then(() => console.log("[Preloader video] el.play() resolved — playback started successfully"))
-        .catch((err) => {
-          console.error(
-            "[Preloader video] el.play() REJECTED — this is likely the real bug. " +
-              "Browser blocked autoplay. Error name:",
-            err?.name,
-            "message:",
-            err?.message,
-          );
-        });
-    }
-  }, [shouldRender, prefersReducedMotion, videoFailed]);
+  }, [shouldRender, prefersReducedMotion]);
 
   // Tell the consent banner when the preloader is gone (or was never shown).
   useEffect(() => {
@@ -120,13 +59,13 @@ export function Preloader() {
         (window as unknown as { __preloaderDone?: boolean }).__preloaderDone = true;
         window.dispatchEvent(new Event("arena:preloader-done"));
       },
-      shouldRender === false ? 0 : 750,
+      shouldRender === false ? 0 : 500,
     );
     return () => clearTimeout(t);
   }, [shouldRender, visible]);
 
   // Lock scroll while the preloader is up so the page can't be scrolled
-  // underneath it during the reveal sequence.
+  // underneath it during the reveal.
   useEffect(() => {
     if (shouldRender && visible) {
       const original = document.body.style.overflow;
@@ -145,107 +84,22 @@ export function Preloader() {
         <motion.div
           key="preloader"
           initial={{ opacity: 1 }}
-          exit={
-            prefersReducedMotion
-              ? { opacity: 0 }
-              : { opacity: 0, scale: 1.04 }
-          }
-          transition={{ duration: prefersReducedMotion ? 0.3 : 0.7, ease: "easeInOut" }}
-          className="fixed inset-0 z-[100] flex items-center justify-center overflow-hidden bg-deep-900"
+          exit={{ opacity: 0 }}
+          transition={{ duration: prefersReducedMotion ? 0.3 : 0.5, ease: "easeInOut" }}
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-deep-900 px-6"
         >
-          {!prefersReducedMotion && !videoFailed ? (
-            <video
-              ref={videoRef}
-              autoPlay
-              muted
-              preload="auto"
-              loop={false}
-              playsInline
-              onLoadedMetadata={(e) => {
-                e.currentTarget.playbackRate = PLAYBACK_RATE;
-              }}
-              onPlay={(e) => {
-                e.currentTarget.playbackRate = PLAYBACK_RATE;
-                console.log("[Preloader video] play — playbackRate set to", PLAYBACK_RATE);
-              }}
-              onLoadStart={() => console.log("[Preloader video] loadstart — browser began fetching the file")}
-              onCanPlay={() => console.log("[Preloader video] canplay — file loaded enough to play")}
-              onLoadedData={() => console.log("[Preloader video] loadeddata — first frame decoded")}
-              onWaiting={() => console.log("[Preloader video] waiting — buffering")}
-              onEnded={() => {
-                console.log("[Preloader video] ended — playback finished, revealing site");
-                setVisible(false);
-              }}
-              onPlaying={() => console.log("[Preloader video] playing — actually rendering frames now")}
-              onError={(e) => {
-                // Log the REAL browser MediaError (code + message) so the
-                // actual failure reason is visible, not just "it failed".
-                const mediaError = e.currentTarget.error;
-                console.error(
-                  "[Preloader video] onError fired. MediaError code:",
-                  mediaError?.code,
-                  "(1=ABORTED, 2=NETWORK, 3=DECODE, 4=SRC_NOT_SUPPORTED)",
-                  "message:",
-                  mediaError?.message || "(no message provided by browser)",
-                );
-                // Explicit fallback: stop rendering the <video> element
-                // entirely so there's no broken/blank video box — the
-                // navy overlay + logo reveal below are a
-                // complete preloader on their own (this is exactly what
-                // reduced-motion users already see).
-                setVideoFailed(true);
-              }}
-              className="absolute inset-0 h-full w-full object-cover"
-              src="/videos/finance_video_5.mp4"
-            />
-          ) : null}
-
-          {/* Flat navy overlay (~70%) so the logo stays legible over the video */}
-          <div aria-hidden className="absolute inset-0 bg-deep-900/70" />
-
-          <div className="relative flex flex-col items-center gap-5 px-6 text-center">
-            <motion.div
-              initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: prefersReducedMotion ? 0.3 : 0.8, ease: "easeOut" }}
-            >
-              <Image
-                src="/images/logo-light.png"
-                alt="Arena Financial Services"
-                width={900}
-                height={467}
-                priority
-                className="h-28 w-auto sm:h-40"
-              />
-            </motion.div>
-
-            {/* Animated underline that fills as the "load" progresses */}
-            <div className="h-[2px] w-40 overflow-hidden bg-white/15 sm:w-56">
-              <motion.div
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{
-                  duration: prefersReducedMotion ? 0.3 : 1.5,
-                  delay: prefersReducedMotion ? 0 : 0.9,
-                  ease: "easeInOut",
-                }}
-                style={{ originX: 0 }}
-                className="h-full w-full bg-primary-300"
-              />
-            </div>
-
-            <motion.p
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.6,
-                delay: prefersReducedMotion ? 0.1 : 1.5,
-              }}
-              className="text-sm font-semibold tracking-wide text-white"
-            >
-              Transparency is our Policy
-            </motion.p>
-          </div>
+          <p className="flex flex-wrap items-center justify-center gap-x-[0.3em] text-center font-display text-3xl font-bold tracking-tight text-white sm:text-5xl">
+            {WORDS.map((word, i) => (
+              <motion.span
+                key={word}
+                initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: prefersReducedMotion ? 0 : 0.15 + i * 0.2, ease: "easeOut" }}
+              >
+                {word}
+              </motion.span>
+            ))}
+          </p>
         </motion.div>
       ) : null}
     </AnimatePresence>
