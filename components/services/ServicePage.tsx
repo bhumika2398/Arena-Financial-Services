@@ -78,6 +78,19 @@ export function ServicePage({ content }: { content: ServiceContent }) {
       <section className="bg-mint py-10 sm:py-14">
         <Container className="grid max-w-6xl items-start gap-6 lg:grid-cols-[minmax(0,1fr)_19rem]">
           <div className="flex min-w-0 flex-col gap-5">
+            {content.glance?.length ? (
+              <dl
+                aria-label="At a glance"
+                className="grid gap-px overflow-hidden rounded-[18px] border border-deep-900/80 bg-deep-900/80 sm:grid-cols-[repeat(auto-fit,minmax(10rem,1fr))]"
+              >
+                {content.glance.map((g) => (
+                  <div key={g.label} className="bg-white p-5">
+                    <dt className="text-xs font-bold uppercase tracking-[0.18em] text-primary-600">{g.label}</dt>
+                    <dd className="mt-1.5 font-display text-lg font-bold leading-snug text-deep-900">{g.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            ) : null}
             <div className="grid gap-5 md:grid-cols-2">
               <Block n="01" title="What it is" i={0}>
                 <p className="leading-relaxed text-deep-700">{content.what}</p>
@@ -108,10 +121,11 @@ export function ServicePage({ content }: { content: ServiceContent }) {
                   </li>
                 ))}
               </ul>
+              {content.documentsExtra ? <p className="mt-4 font-semibold text-deep-800">{content.documentsExtra}</p> : null}
               <p className="mt-4 text-deep-600">{DOCUMENTS_NOTE}</p>
             </Block>
 
-            <p className="rounded-[12px] border border-deep-200 bg-white px-5 py-4 text-sm text-deep-600">{STANDARD_NOTE}</p>
+            <p className="rounded-[12px] border border-deep-200 bg-white px-5 py-4 text-sm text-deep-600">{content.note ?? STANDARD_NOTE}</p>
           </div>
 
           {/* Desktop: sticky summary */}

@@ -1,6 +1,7 @@
 ﻿"use client";
 
 import { useMemo, useState } from "react";
+import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 
 function formatCurrency(value: number): string {
@@ -67,17 +68,6 @@ function BreakdownDonut({
         strokeLinecap="round"
         transform="rotate(-90 80 80)"
       />
-      <text
-        x="80"
-        y="76"
-        textAnchor="middle"
-        className="fill-deep-900 font-display text-sm font-bold"
-      >
-        {Math.round(principalRatio * 100)}%
-      </text>
-      <text x="80" y="94" textAnchor="middle" className="fill-deep-400 text-[10px]">
-        Principal
-      </text>
     </svg>
   );
 }
@@ -93,6 +83,8 @@ export function EmiCalculator() {
     () => calculateEmi(amount, rate, tenureMonths),
     [amount, rate, tenureMonths],
   );
+
+  const principalPct = Math.round((amount / (amount + totalInterest || 1)) * 100);
 
   return (
     <Card className="grid gap-8 lg:grid-cols-2">
@@ -171,7 +163,12 @@ export function EmiCalculator() {
           </p>
         </div>
 
-        <BreakdownDonut principal={amount} interest={totalInterest} />
+        <div className="flex flex-col items-center gap-2">
+          <BreakdownDonut principal={amount} interest={totalInterest} />
+          <p className="text-sm font-semibold text-deep-700">
+            Principal {principalPct}% | Interest {100 - principalPct}%
+          </p>
+        </div>
 
         <div className="grid w-full grid-cols-2 gap-4 text-left">
           <div>
@@ -191,6 +188,11 @@ export function EmiCalculator() {
             </p>
           </div>
         </div>
+
+        <p className="text-sm text-deep-600">
+          This is an estimate. Your actual EMI depends on the rate the lender sanctions.
+        </p>
+        <Button href="/contact#enquiry">Apply Now</Button>
       </div>
     </Card>
   );
